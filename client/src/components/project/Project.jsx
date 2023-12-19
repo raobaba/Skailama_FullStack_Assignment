@@ -1,14 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import { IoSettingsOutline, IoNotificationsOutline } from "react-icons/io5";
-import MetaData from "../utils/Metadata";
+import MetaData from "../../utils/Metadata";
 import { Link } from "react-router-dom";
-import Top from "../assets/images/Vector1.png";
-import Cuate from "../assets/images/cuate.png";
-import Bottom from "../assets/images/Vector.png";
+import Top from "../../assets/images/Vector1.png"
+import Cuate from "../../assets/images/cuate.png";
+import Bottom from "../../assets/images/Vector.png";
 import { AiTwotoneHome } from "react-icons/ai";
 import { GoPlusCircle } from "react-icons/go";
+import ProjectModal from "./ProjectModal";
 
 function Project() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <MetaData title={"Skai Lama | create new project"} />
@@ -38,8 +48,8 @@ function Project() {
             </div>
           </Link>
           <div className="flex items-center mt-5">
-            <IoSettingsOutline className="text-3xl mr-2" />
-            <IoNotificationsOutline className="text-3xl mr-5" />
+            <IoSettingsOutline className="text-3xl mr-2 cursor-pointer " />
+            <IoNotificationsOutline className="text-3xl mr-5 cursor-pointer " />
           </div>
         </div>
         <div>
@@ -72,11 +82,12 @@ function Project() {
                 </p>
               </div>
             </div>
-            <div className="flex justify-center items-center mt-8">
+            <div onClick={openModal} className="flex justify-center items-center mt-8">
               <button className="text-white bg-slate-950 text-2xl rounded-lg py-3 px-4 flex items-center justify-around ">
                 <GoPlusCircle size={30} className="mr-2 bg-stone-50 rounded-2xl text-black " /> Create New Project
               </button>
             </div>
+            <ProjectModal isOpen={isModalOpen} onClose={closeModal}/>
           </div>
         </div>
       </div>
