@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload"); 
 const path = require("path");
 const Connection = require('./config/db.js')
+const userRouter = require('./routes/user.route.js');
 const app = express();
 
 app.use(express.static("public"));
@@ -21,9 +22,9 @@ app.use(
 );
 app.use(cors());
 Connection();
-
+app.use('/api/v1',userRouter)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend/build")));
+  app.use(express.static(path.join(__dirname, "server/build")));
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname,"index.html"));

@@ -4,7 +4,6 @@ import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
 import Top from "../assets/images/Vector1.png";
 import Bottom from "../assets/images/Vector.png";
 import "../styles/Navbar.css";
-import MetaData from "../utils/Metadata.jsx";
 
 const Navbar = () => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -27,7 +26,7 @@ const Navbar = () => {
 
   return (
     <>
-      <MetaData title="Skai Lama - Shopify Apps to Supercharge DTC and eCommerce..." />
+     
       <div className="MainNavbar bg-gradient-to-r from-purple-200 via-yellow-100 to-indigo-300 md:w-full lg:w-full w-full justify-between h-16 mx-auto top-0 shadow-md flex font-sans rounded-bl-5 rounded-br-5 backdrop-blur z-10 m-auto sticky">
         <Link className="flex justify-around" to="/">
           <div

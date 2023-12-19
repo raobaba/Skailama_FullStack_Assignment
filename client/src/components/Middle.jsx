@@ -15,10 +15,10 @@ function Middle() {
           and Retention.
         </p>
         <div className="flex gap-10">
-          <button className="mt-4 bg-white hover:bg-blue-600 hover:text-white text-black font-semibold py-3 px-4 rounded-lg flex items-center">
+          <button className="mt-4 bg-white hover:bg-blue-600 hover:text-white text-black font-semibold py-3 px-4 rounded-3xl flex items-center">
             Checkout our Apps <FaArrowRightLong className="ml-2" />
           </button>
-          <button className="mt-4 bg-yellow-500 hover:bg-blue-600 hover:text-white text-black font-semibold py-3 px-4 rounded-lg flex items-center">
+          <button className="mt-4 bg-yellow-500 hover:bg-blue-600 hover:text-white text-black font-semibold py-3 px-4 rounded-3xl flex items-center">
             Book a Demo <FaArrowRightLong className="ml-2" />
           </button>
         </div>
