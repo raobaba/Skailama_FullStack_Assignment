@@ -1,10 +1,9 @@
 import './App.css';
-import Home from './components/Home';
-
+import Routing from './allRoutes/routing.jsx'
 function App() {
   return (
     <div>
-       <Home/>
+     <Routing/>
     </div>
   );
 }

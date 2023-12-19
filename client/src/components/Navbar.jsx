@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <>
       <MetaData title="Skai Lama - Shopify Apps to Supercharge DTC and eCommerce..." />
-      <div className="MainNavbar md:w-full lg:w-full w-full justify-between h-16 mx-auto top-0 shadow-md flex font-sans rounded-bl-5 rounded-br-5 backdrop-blur z-10 m-auto sticky">
+      <div className="MainNavbar bg-gradient-to-r from-purple-200 via-yellow-100 to-indigo-300 md:w-full lg:w-full w-full justify-between h-16 mx-auto top-0 shadow-md flex font-sans rounded-bl-5 rounded-br-5 backdrop-blur z-10 m-auto sticky">
         <Link className="flex justify-around" to="/">
           <div
             className={`Logo h-8 mt-2 ml-12 transition-opacity duration-300 ease-in-out ${
@@ -90,7 +90,7 @@ const Navbar = () => {
             </Link>
           </div>
           <Link
-            to="/SignIn"
+            to="/signin"
             className="SignInButton mt-4 pt-1 w-20 h-9 rounded-md text-green-800 font-bold cursor-pointer text-center border border-green-700 mr-14 no-underline hover:bg-green-700 hover:text-white"
           >
             Sign In
