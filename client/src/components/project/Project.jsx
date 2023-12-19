@@ -59,6 +59,7 @@ function Project() {
           >
             <AiTwotoneHome className="mr-2" /> Back to Home
           </Link>
+          <ProjectModal isOpen={isModalOpen} onClose={closeModal}/>
           <div className="p-8 rounded-lg w-auto text-center">
             <div className="w-694 h-86 mt-[-30px] left-612">
               <h1 className="text-4xl font-bold text-purple-700">
@@ -87,7 +88,6 @@ function Project() {
                 <GoPlusCircle size={30} className="mr-2 bg-stone-50 rounded-2xl text-black " /> Create New Project
               </button>
             </div>
-            <ProjectModal isOpen={isModalOpen} onClose={closeModal}/>
           </div>
         </div>
       </div>
