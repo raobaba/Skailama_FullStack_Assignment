@@ -42,7 +42,7 @@ function UploadSidebar() {
           <p className="ml-8 mt-6 font-semibold">Podcast upload flow</p>
         </div>
         <div>
-          <Link className="flex mt-2 items-center w-11/12 py-3 px-5 mx-2 rounded-3xl hover:bg-gray-200" activeClassName="bg-purple-200" to="/upload/projects">
+          <Link className="flex mt-2 items-center w-11/12 py-3 px-5 mx-2 rounded-3xl hover:bg-gray-200" activeClassName="bg-purple-200" to="/upload/project-section">
             <PiNumberCircleOneFill size={20} className=" bg-slate-100 text-slate-700 rounded-full "/>
             <p className="ml-2">Projects</p>
           </Link>
