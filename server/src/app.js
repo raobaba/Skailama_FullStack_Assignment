@@ -2,7 +2,6 @@ const express = require("express");
 require("dotenv").config();
 const ejs = require("ejs");
 const cors = require("cors");
-const errorMiddleware = require("./middlewares/error");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload"); 
 const path = require("path");
@@ -34,7 +33,5 @@ if (process.env.NODE_ENV === "production") {
     res.send("Server is Running! 🚀");
   });
 }
-
-app.use(errorMiddleware);
 
 module.exports = app;
