@@ -38,8 +38,8 @@ function Upload() {
           <UploadSidebar />
         </div>
         <div className="w-4/5">
-          <div className="w-full h-16 mt-10 flex items-center justify-between px-4">
-            <div className="flex">
+          <div className="w-full h-16 mt-5 flex items-center justify-between px-4">
+            <div className="flex ml-12">
               <AiTwotoneHome size={22} className="text-purple-700" />
               <span  className="text-md font-semibold ml-2 text-gray-400">
                 {" "}
