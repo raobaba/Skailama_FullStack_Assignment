@@ -3,59 +3,67 @@ const jwt = require("jsonwebtoken");
 const sendToken = require("../utils/sendToken");
 const User = require("../models/user.model.js");
 const cloudinary = require("cloudinary");
-const asyncHandler = require('../middlewares/asyncHandler.middleware.js');
+const asyncHandler = require("../middlewares/asyncHandler.middleware.js");
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, email, password } = req.body;
-  const myCloud = await cloudinary.uploader.upload(req.files.avatar.tempFilePath, {
-    folder: "avatars",
-    width: 150,
-    crop: "scale",
+    const { username, email, password } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already exists." });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10); 
+  
+    const myCloud = await cloudinary.uploader.upload(
+      req.files.avatar.tempFilePath,
+      {
+        folder: "avatars",
+        width: 150,
+        crop: "scale",
+      }
+    );
+    const user = await User.create({
+      username,
+      email,
+      password: hashedPassword, 
+      avatar: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
+    });
+    sendToken(user, 200, res);
   });
-  const user = await User.create({
-    username,
-    email,
-    password,
-    avatar: {
-      public_id: myCloud.public_id,
-      url: myCloud.secure_url,
-    },
-  });
-  sendToken(user, 200, res);
-});
+  
 
 const loginUser = asyncHandler(async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      const user = await User.findOne({ email });
-     console.log("user",user)
-      if (!user) {
-        return res.status(400).json({ message: "Invalid credentials" });
-      }
-  
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
-  
-      res.cookie("token", token, {
-        httpOnly: true,
-        maxAge: 3600000,
-        sameSite: "strict",
-      });
-  
-      res.cookie("userId", user._id, {
-        httpOnly: true,
-        maxAge: 3600000,
-        sameSite: "strict",
-      });
-  
-      res.json({ status: 201, message: "Logged in successfully", user });
-    } catch (error) {
-      console.error("Login error:", error);
-      res.status(500).json({ message: "Internal server error" });
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid credentials" });
     }
-  });
-  
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 3600000,
+      sameSite: "strict",
+    });
+    res.cookie("userId", user._id, {
+      httpOnly: true,
+      maxAge: 3600000,
+      sameSite: "strict",
+    });
+    res.json({ status: 201, message: "Logged in successfully", user });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 const logoutUser = asyncHandler(async (req, res) => {
   res.clearCookie("token", {
