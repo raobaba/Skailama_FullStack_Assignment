@@ -34,7 +34,7 @@ function NewProject({ projectName = [], openModal }) {
           {projectName.map((project, index) => (
             <div
               key={index}
-              className="flex ml-5 items-center h-24 w-64 rounded-2xl shadow-lg border border-slate-300"
+              className="flex ml-5 cursor-pointer items-center h-24 w-64 rounded-2xl shadow-lg border border-slate-300"
             >
               {/* Displaying project initials or first letters */}
               <div className="mr-8 ml-2 w-20 h-20 border border-slate-500 rounded-xl bg-purple-700">
@@ -47,17 +47,20 @@ function NewProject({ projectName = [], openModal }) {
                   ))
                 ) : (
                   // Displaying first two letters if no space in project name
-                  <span
-                  className="text-6xl text-white ml-1">
+                  <span className="text-6xl text-white ml-1">
                     {project.substring(0, 2).toUpperCase()}
                   </span>
                 )}
               </div>
               {/* Displaying full project name */}
               <div className=" mr-2 mt-[-15px] ">
-                <p className="text-purple-700 text-bold">{project}</p>
-                <p className="text-sm">4 episodes</p>
-                <p className="text-xs mt-2">created a week age</p>
+                <p className="text-purple-700 text-lg font-bold whitespace-nowrap truncate">
+                  {project}
+                </p>
+                <p className="text-sm font-semibold ">4 episodes</p>
+                <p className="text-xs mt-2 font-semibold text-gray-500 ">
+                  created a week age
+                </p>
               </div>
             </div>
           ))}
