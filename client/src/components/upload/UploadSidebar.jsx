@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Top from "../../assets/images/Vector1.png";
 import Bottom from "../../assets/images/Vector.png";
 import {
@@ -8,7 +9,6 @@ import {
   PiNumberCircleFourFill,
 } from "react-icons/pi";
 import { RiSettings5Line } from "react-icons/ri";
-import { Link, useLocation } from "react-router-dom";
 
 function UploadSidebar() {
   const [activeSection, setActiveSection] = useState("project-section");
@@ -17,11 +17,12 @@ function UploadSidebar() {
   const handleSetActive = (section) => {
     setActiveSection(section);
   };
+
   return (
     <div className="flex flex-col h-screen justify-between">
       <div>
         <div>
-          <Link className="flex justify-around mt-6 " to="/">
+          <Link className="flex justify-around mt-6" to="/">
             <div className="Logo h-4 transition-opacity duration-300 ml-7 ease-in-out">
               <img
                 className="pt-1 ml-1"

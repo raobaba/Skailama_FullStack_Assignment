@@ -19,7 +19,7 @@ function Routing() {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/project" element={<Project />} />
-      <Route path="/upload" element={<Upload />}>
+      <Route path="/upload/:projectName/*" element={<Upload />}>
       <Route index element={<UploadSidebar />} />
         <Route path="project-section" element={<ProjectSection/>} />
         <Route path="configurations" element={<Configuration />} />
