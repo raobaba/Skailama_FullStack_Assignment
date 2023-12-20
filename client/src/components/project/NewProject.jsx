@@ -6,7 +6,7 @@ function NewProject({ projectName = [], openModal }) {
   const navigate = useNavigate();
 
   const redirectToUpload = (project) => {
-    navigate(`/upload/${project}`);
+    navigate(`/upload/${project}/project-section`);
   };
 
   return (

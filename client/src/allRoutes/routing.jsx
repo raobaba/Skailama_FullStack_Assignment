@@ -25,6 +25,9 @@ function Routing() {
         <Route path="configurations" element={<Configuration />} />
         <Route path="deployment" element={<Deployment />} />
         <Route path="pricing" element={<Pricing />} />
+      </Route>
+      <Route path="/upload/*" element={<Upload />}>
+      <Route index element={<UploadSidebar />} />
         <Route path="settings" element={<Setting />} />
       </Route>
     </Routes>
