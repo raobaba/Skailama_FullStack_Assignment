@@ -1,7 +1,7 @@
 import React from "react";
 import UploadSidebar from "./UploadSidebar";
 import MetaData from "../../utils/Metadata";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 function Upload() {
   return (
@@ -12,7 +12,7 @@ function Upload() {
           <UploadSidebar />
         </div>
         <div className="w-4/5">
-          <Outlet /> {/* This will render the nested routes */}
+          <Outlet /> 
         </div>
       </div>
     </>

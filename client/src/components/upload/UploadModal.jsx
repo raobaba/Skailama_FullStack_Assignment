@@ -1,15 +1,11 @@
-import React from 'react'
-
+import React from "react";
 
 function UploadModal() {
   return (
-   <>
-
-    <div>
-        
-        </div>
-   </>
-  )
+    <>
+      <div></div>
+    </>
+  );
 }
 
-export default UploadModal
+export default UploadModal;
