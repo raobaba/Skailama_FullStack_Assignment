@@ -47,7 +47,8 @@ function NewProject({ projectName = [], openModal }) {
                   ))
                 ) : (
                   // Displaying first two letters if no space in project name
-                  <span style={{ fontSize: "1.5rem" }}>
+                  <span
+                  className="text-6xl text-white ml-1">
                     {project.substring(0, 2).toUpperCase()}
                   </span>
                 )}
