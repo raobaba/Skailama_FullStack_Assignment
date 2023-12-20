@@ -5,6 +5,7 @@ import Navbar from "../Navbar";
 import { API } from "../../utils/Api.js";
 
 const SignUp = () => {
+  const [signingUp, setSigningUp] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -30,6 +31,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSigningUp(true);
     const formDataToSend = new FormData();
     formDataToSend.append("username", formData.username);
     formDataToSend.append("email", formData.email);
@@ -119,12 +121,21 @@ const SignUp = () => {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Sign Up
-              </button>
+              {signingUp ? (
+                <button
+                  className="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded cursor-not-allowed opacity-50"
+                  disabled
+                >
+                  Signing...
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                  Sign Up
+                </button>
+              )}
               <div className="text-center mt-4">
                 <p>
                   Already have an account?{" "}

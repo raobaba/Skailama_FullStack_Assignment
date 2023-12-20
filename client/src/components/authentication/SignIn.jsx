@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MetaData from '../../utils/Metadata';
 import Navbar from '../Navbar';
+import { API } from "../../utils/Api.js";
 
 const SignIn = () => {
+  const [login, setLogin] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: '',
     email: '',
+    password: '',
   });
 
   const handleChange = (e) => {
@@ -17,10 +20,18 @@ const SignIn = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    setLogin(true);
+    try {
+      const response = await API.signInUser(formData);
+      console.log('Login successful:', response);
+      navigate('/project');
+    } catch (error) {
+      console.error('Login failed:', error.message);
+    } finally {
+      setLogin(false);
+    }
   };
 
   return (
@@ -37,44 +48,53 @@ const SignIn = () => {
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-6">
               <div>
-                <label htmlFor="username" className="sr-only">
-                  Username
-                </label>
-                <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  value={formData.username}
-                  onChange={handleChange}
-                  required
-                  className="appearance-none rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border border-gray-300"
-                  placeholder="Username"
-                />
-              </div>
-              <div>
                 <label htmlFor="email" className="sr-only">
                   Email address
                 </label>
                 <input
                   id="email"
                   name="email"
-                  type="email"
+                  type="text"
                   value={formData.email}
                   onChange={handleChange}
                   required
                   className="appearance-none rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border border-gray-300"
-                  placeholder="Email address"
+                  placeholder="Email"
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  className="appearance-none rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border border-gray-300"
+                  placeholder="Password"
                 />
               </div>
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Sign In
-              </button>
+              {login ? (
+                <button
+                  className="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded cursor-not-allowed opacity-50"
+                  disabled
+                >
+                  Logging...
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                  Log In
+                </button>
+              )}
               <div className="text-center mt-4">
                 <p>
                   Don't have an account?{' '}
