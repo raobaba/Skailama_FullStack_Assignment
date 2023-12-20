@@ -13,9 +13,7 @@ function Routing() {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/project" element={<Project />} />
-      <Route path="/upload/*" element={<Upload />}>
-        
-      </Route>
+      <Route path="/upload/*" element={<Upload />}/>
     </Routes>
   );
 }
