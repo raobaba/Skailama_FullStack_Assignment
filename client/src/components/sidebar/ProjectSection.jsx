@@ -22,21 +22,21 @@ function ProjectSection() {
   ];
 
   return (
-    <div className="container mx-auto py-3">
-      <h1 className="text-3xl font-bold ml-16 mb-4">Upload</h1>
-      <div className="grid ml-16 grid-cols-1 mt-8 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-6 w-10/12">
+    <div className="container mx-auto py-1">
+      <h1 className="text-3xl font-bold ml-16 mb-4 text-purple-700">Upload</h1>
+      <div className="grid ml-16 grid-cols-1 mt-5 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-6 w-10/12">
         {uploadItems.map((item, index) => (
           <div
             key={index}
-            className="flex items-center justify-center bg-white w-60 cursor-pointer h-24 border border-gray-300 p-4 rounded-lg shadow-md"
+            className="flex items-center justify-center bg-white w-60 cursor-pointer h-20 border border-gray-300 p-4 rounded-lg shadow-md"
           >
             <img src={item.image} alt="logo" className="w-12 h-12 mb-2" />
-            <p className="text-center font-bold text-gray-500">{item.text}</p>
+            <p className="text-center font-bold text-gray-500 ">{item.text}</p>
           </div>
         ))}
       </div>
       <div className="mt-8 text-center">
-        <p className="text-md text-gray-400 font-normal">or</p>
+        <p className="text-md text-gray-400 font-normal mr-16">or</p>
       </div>
       <div className="w-8/12 ml-36 cursor-pointer border-dashed border-2 border-gray-400 p-8 rounded-xl mt-5 flex flex-col items-center justify-center">
         <MdOutlineCloudUpload className="text-6xl text-purple-700 mt-[-20px]" />
