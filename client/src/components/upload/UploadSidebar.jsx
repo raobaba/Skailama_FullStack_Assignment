@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation,useParams } from "react-router-dom";
 import Top from "../../assets/images/Vector1.png";
 import Bottom from "../../assets/images/Vector.png";
 import {
@@ -17,6 +17,9 @@ function UploadSidebar() {
   const handleSetActive = (section) => {
     setActiveSection(section);
   };
+
+  const {projectName} = useParams();
+  console.log(projectName);
 
   return (
     <div className="flex flex-col h-screen justify-between">
@@ -54,7 +57,7 @@ function UploadSidebar() {
                 ? "bg-purple-700 text-white"
                 : "hover:bg-gray-200"
             }`}
-            to="/upload/project-section"
+            to={`/upload/${projectName}/project-section`}
             onClick={() => handleSetActive("project-section")}
           >
             <PiNumberCircleOneFill
@@ -69,7 +72,7 @@ function UploadSidebar() {
                 ? "bg-purple-700 text-white"
                 : "hover:bg-gray-200"
             }`}
-            to="/upload/configurations"
+            to={`/upload/${projectName}/configurations`}
             onClick={() => handleSetActive("configurations")}
           >
             <PiNumberCircleTwoFill
@@ -84,7 +87,7 @@ function UploadSidebar() {
                 ? "bg-purple-700 text-white"
                 : "hover:bg-gray-200"
             }`}
-            to="/upload/deployment"
+            to={`/upload/${projectName}/deployment`}
             onClick={() => handleSetActive("deployment")}
           >
             <PiNumberCircleThreeFill
@@ -99,7 +102,7 @@ function UploadSidebar() {
                 ? "bg-purple-700 text-white"
                 : "hover:bg-gray-200"
             }`}
-            to="/upload/pricing"
+            to={`/upload/${projectName}/pricing`}
             onClick={() => handleSetActive("pricing")}
           >
             <PiNumberCircleFourFill
@@ -115,7 +118,7 @@ function UploadSidebar() {
           className={`flex items-center w-11/12 py-3 px-5 mx-2 rounded-3xl border-slate-500 ${
             activeSection === "settings" ? "bg-purple-700 text-white" : "hover:bg-gray-200"
           }`}
-          to="/upload/settings"
+          to={`/upload/${projectName}/settings`}
           onClick={() => handleSetActive("settings")}
         >
           <RiSettings5Line
