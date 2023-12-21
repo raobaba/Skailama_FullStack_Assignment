@@ -8,15 +8,12 @@ import { TiArrowSortedDown } from "react-icons/ti";
 import EN from "../../assets/images/EN-icon.png";
 
 function Upload() {
-
   const { projectName } = useParams();
   const location = useLocation();
-
   const segments = location.pathname.split("/").filter(Boolean);
   const lastSegment = segments[segments.length - 1];
 
   useEffect(() => {
-    // console.log("Last segment:", lastSegment);
   }, [lastSegment]);
 
   const displaySegment =

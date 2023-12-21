@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
+import { MdSearch } from "react-icons/md";
 
 const EditTranscript = () => {
   const location = useLocation();
   const { description } = location.state || {};
 
   const [editMode, setEditMode] = useState(false);
-  const [editedDescription, setEditedDescription] = useState(description || '');
+  const [editedDescription, setEditedDescription] = useState(description || "");
   const navigate = useNavigate();
   const { projectName } = useParams();
 
@@ -25,7 +26,7 @@ const EditTranscript = () => {
   };
 
   useEffect(() => {
-    setEditedDescription(description || '');
+    setEditedDescription(description || "");
   }, [description]);
 
   return (
@@ -56,30 +57,49 @@ const EditTranscript = () => {
         </div>
       </div>
       {editMode ? (
-  <div className="border border-gray-300 mt-5 pb-2 rounded-md p-2 w-full h-96 resize-y">
-    <button className="px-3 mt-1 py-1 w-20 h-8 flex bg-black text-white rounded-3xl" onClick={handleEditClick}>
-      <FaPen className="mt-1 mr-2" />
-      edit
-    </button>
-    <textarea
-      className="rounded-md p-2 w-full h-80 mt-3 resize-y"
-      value={editedDescription}
-      onChange={handleDescriptionChange}
-      wrap="soft"
-    />
-  </div>
-) : (
-  <div className="border border-gray-300 mt-8 pb-2 rounded-md p-2 w-full h-96 resize-y">
-    <button className="px-3 mt-1 py-1 w-20 h-8 flex bg-black text-white rounded-3xl" onClick={handleEditClick}>
-      <FaPen className="mt-1 mr-2" />
-      edit
-    </button>
-    <div className="rounded-md p-2 w-full h-80 mt-3 resize-y">
-      {editedDescription}
-    </div>
-  </div>
-)}
-
+        <div className="border border-gray-300 mt-5 pb-2 rounded-md p-2 w-full h-96 resize-y">
+          <div className="flex justify-between">
+            <div>
+              <button
+                className="px-3 mt-1 py-1 w-20 h-8 flex bg-black text-white rounded-3xl"
+                onClick={handleEditClick}
+              >
+                <FaPen className="mt-1 mr-2" />
+                edit
+              </button>
+            </div>
+            <div className="w-6 h-6 rounded-full border flex justify-center text-red-600 border-red-500 items-center bg-slate-100">
+              <MdSearch />
+            </div>
+          </div>
+          <textarea
+            className="rounded-md p-2 w-full h-80 mt-3 resize-y"
+            value={editedDescription}
+            onChange={handleDescriptionChange}
+            wrap="soft"
+          />
+        </div>
+      ) : (
+        <div className="border border-gray-300 mt-8 pb-2 rounded-md p-2 w-full h-96 resize-y">
+          <div className="flex justify-between">
+            <div>
+              <button
+                className="px-3 mt-1 py-1 w-20 h-8 flex bg-black text-white rounded-3xl"
+                onClick={handleEditClick}
+              >
+                <FaPen className="mt-1 mr-2" />
+                edit
+              </button>
+            </div>
+            <div className="w-6 h-6 rounded-full border flex justify-center text-red-600 border-red-500 bg-slate-100 items-center">
+              <MdSearch />
+            </div>
+          </div>
+          <div className="rounded-md p-2 w-full h-80 mt-3 resize-y">
+            {editedDescription}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
