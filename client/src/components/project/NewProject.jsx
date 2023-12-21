@@ -4,7 +4,6 @@ import { GoPlusCircle } from "react-icons/go";
 
 function NewProject({ projectName = [], openModal }) {
   const navigate = useNavigate();
-
   const redirectToUpload = (project) => {
     navigate(`/upload/${project}/project-section`);
   };

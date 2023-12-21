@@ -12,7 +12,6 @@ const registerUser = asyncHandler(async (req, res) => {
       return res.status(400).json({ message: "Email already exists." });
     }
     const hashedPassword = await bcrypt.hash(password, 10); 
-  
     const myCloud = await cloudinary.uploader.upload(
       req.files.avatar.tempFilePath,
       {
@@ -33,7 +32,6 @@ const registerUser = asyncHandler(async (req, res) => {
     sendToken(user, 200, res);
   });
   
-
 const loginUser = asyncHandler(async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -82,5 +80,43 @@ const getUserById = asyncHandler(async (req, res) => {
   }
   res.status(200).json({ status: 200, user });
 });
+const updateUserDetails = asyncHandler(async (req, res) => {
+  const userId = req.params.id;
+  const { username } = req.body;
+  let avatarData = {};
+  if (req.files && req.files.avatar) {
+    const myCloud = await cloudinary.uploader.upload(
+      req.files.avatar.tempFilePath,
+      {
+        folder: "avatars",
+        width: 150,
+        crop: "scale",
+      }
+    );
 
-module.exports = { registerUser, loginUser, logoutUser, getUserById };
+    avatarData = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+  }
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (username) {
+      user.username = username;
+    }
+    if (Object.keys(avatarData).length !== 0) {
+      user.avatar = avatarData;
+    }
+    await user.save();
+    res.status(200).json({ status: 200, user });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user details", error });
+  }
+});
+
+
+
+module.exports = { registerUser, loginUser, logoutUser, getUserById, updateUserDetails };
