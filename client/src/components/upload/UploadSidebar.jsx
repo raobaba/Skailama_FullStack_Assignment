@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Top from "../../assets/images/Vector1.png";
 import Bottom from "../../assets/images/Vector.png";
 import { RiNumber1, RiNumber2, RiNumber3, RiNumber4 } from "react-icons/ri";
@@ -7,7 +7,6 @@ import { RiSettings5Line } from "react-icons/ri";
 
 function UploadSidebar() {
   const [activeSection, setActiveSection] = useState("project-section");
-  const location = useLocation();
 
   const handleSetActive = (section) => {
     setActiveSection(section);

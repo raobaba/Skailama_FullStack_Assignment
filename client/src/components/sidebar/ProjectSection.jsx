@@ -4,7 +4,7 @@ import Spotify from "../../assets/images/spotify.png";
 import RSS from "../../assets/images/RSS.png";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import UploadModal from "../upload/UploadModal";
-import Transcript from "../upload/Transcript";
+import Transcript from "../transcript/Transcript";
 
 function ProjectSection() {
   const [fileUpload, setFileUpload] = useState(null);

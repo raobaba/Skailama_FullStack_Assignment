@@ -11,6 +11,7 @@ import Deployment from '../components/sidebar/Deployment.jsx';
 import Pricing from '../components/sidebar/Pricing.jsx';
 import Setting from '../components/sidebar/Setting.jsx';
 import UploadSidebar from "../components/upload/UploadSidebar.jsx";
+import EditTranscript from "../components/transcript/EditTranscript.jsx";
 
 function Routing() {
   return (
@@ -25,6 +26,7 @@ function Routing() {
         <Route path="configurations" element={<Configuration />} />
         <Route path="deployment" element={<Deployment />} />
         <Route path="pricing" element={<Pricing />} />
+        <Route path="edit-transcript" element={<EditTranscript/>} />
       </Route>
       <Route path="/upload/*" element={<Upload />}>
       <Route index element={<UploadSidebar />} />
