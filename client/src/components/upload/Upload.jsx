@@ -23,7 +23,7 @@ function Upload() {
   lastSegment === "project-section"
     ? "/ Upload"
     : lastSegment === "configurations"
-    ? "/ Configuration"
+    ? "/ Winget Configuration"
     : lastSegment === "pricing"
     ? "/ Pricing"
     : lastSegment === "deployment"
