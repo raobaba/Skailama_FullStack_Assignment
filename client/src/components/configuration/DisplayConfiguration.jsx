@@ -15,6 +15,7 @@ function DisplayConfiguration() {
   const toggle = () => {
     setIsToggled(!isToggled);
   };
+  
   return (
     <div className="overflow-y-scroll max-h-[410px]">
       <div className="mx-auto max-w-full h-[70%] ">
@@ -27,7 +28,7 @@ function DisplayConfiguration() {
               <input
                 type="text"
                 placeholder="Choose"
-                className="w-5/6 mr-2 px-2 py-1 my-1 border rounded"
+                className="w-5/6 mr-2 px-2 py-1 my-1 border text-sm rounded"
                 value={primaryColor}
                 onChange={(e) => setPrimaryColor(e.target.value)}
               />
@@ -51,13 +52,13 @@ function DisplayConfiguration() {
               <input
                 type="text"
                 placeholder="Choose"
-                className="w-10/12 mr-2 px-2 ml-10 py-1 my-1 border rounded"
+                className="w-10/12 mr-2 px-2 ml-10 py-1 my-1 text-sm border rounded"
                 value={fontColor}
                 onChange={(e) => setFontColor(e.target.value)}
               />
               <input 
               type="color" 
-              className="w-12 h-10 rounded-xl" 
+              className="w-12 h-10 rounded-xl " 
               value={fontColor}
               onChange={handleFontColorChange}
               />
@@ -75,8 +76,8 @@ function DisplayConfiguration() {
             <div className="flex">
               <input
                 type="text"
-                placeholder="Choose"
-                className="w-11/12 mr-2 px-2 py-1 my-1 border rounded"
+                placeholder="24"
+                className="w-11/12 mr-2 px-2 text-sm py-1 my-1 border rounded"
               />
             </div>
             <span className="text-gray-500 text-xs">
@@ -91,7 +92,7 @@ function DisplayConfiguration() {
               <input
                 type="text"
                 placeholder="Choose"
-                className="w-11/12 mr-2 px-2 py-1 my-1 ml-10 border rounded"
+                className="w-11/12 mr-2 px-2 text-sm py-1 my-1 ml-10 border rounded"
               />
             </div>
             <span className="text-gray-500 text-xs ml-10">
@@ -129,7 +130,7 @@ function DisplayConfiguration() {
               Chat Icon Size
             </label>
             <div className="flex">
-              <select className="w-11/12 mr-2 text-gray-500 px-2 py-1 my-1 border rounded appearance-none">
+              <select className="w-11/12 text-sm mr-2 text-gray-500 px-2 py-1 my-1 border rounded appearance-none">
                 <option value="" selected disabled hidden>
                   Small (48*48 px)
                 </option>
@@ -145,7 +146,7 @@ function DisplayConfiguration() {
               Position on Screen
             </label>
             <div className="flex">
-              <select className="w-11/12 text-gray-500 mr-2 px-2 ml-10 py-1 my-1 border rounded appearance-none">
+              <select className="w-11/12 text-gray-500 mr-2 text-sm px-2 ml-10 py-1 my-1 border rounded appearance-none">
                 <option value="" selected disabled hidden>
                   Bottom right
                 </option>
@@ -164,8 +165,8 @@ function DisplayConfiguration() {
             <div className="flex">
               <input
                 type="text"
-                placeholder="Choose"
-                className="w-11/12 mr-2 px-2 py-1 my-1 border rounded"
+                placeholder="20"
+                className="w-11/12 mr-2 px-2 py-1 text-sm my-1 border rounded"
               />
             </div>
           </div>
@@ -176,8 +177,8 @@ function DisplayConfiguration() {
             <div className="flex">
               <input
                 type="text"
-                placeholder="Choose"
-                className="w-11/12 mr-2 px-2 py-1 my-1 ml-10 border rounded"
+                placeholder="20"
+                className="w-11/12 mr-2 px-2 py-1 text-sm my-1 ml-10 border rounded"
               />
             </div>
           </div>

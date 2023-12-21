@@ -9,7 +9,7 @@ function InputField({ id, label, placeholder, helperText }) {
       <input
         type="text"
         id={id}
-        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+        className="w-full px-3 py-2 border rounded-md text-md focus:outline-none focus:border-blue-500"
         placeholder={placeholder}
       />
       <span className="text-gray-500 text-xs">{helperText}</span>
