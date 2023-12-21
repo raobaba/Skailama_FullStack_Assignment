@@ -10,24 +10,26 @@ function ProjectSection() {
   const [fileUpload, setFileUpload] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showTrans, setShowTrans] = useState(false);
-  const [transcriptList, setTranscriptList] = useState([]); 
+  const [transcriptList, setTranscriptList] = useState([]);
   const [selectedItem, setSelectedItem] = useState({});
 
   const openModal = (item) => {
     setIsModalOpen(true);
     setSelectedItem(item);
   };
-  console.log(selectedItem)
+  console.log(selectedItem);
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
   const addTranscript = (newTranscript) => {
-    setTranscriptList([...transcriptList, newTranscript]);
+    setTranscriptList([
+      ...transcriptList,
+      { name: newTranscript.name, description: newTranscript.description },
+    ]);
     setShowTrans(true);
   };
-  
 
   const handleFileUpload = (event) => {
     const uploadedFile = event.target.files[0];
@@ -64,15 +66,17 @@ function ProjectSection() {
         addTranscript={addTranscript}
         selectedItem={selectedItem}
       />
-      
-       {!showTrans ? (
-           <><div className="mt-8 text-center">
-          <p className="text-md text-gray-400 font-normal mr-16">or</p>
-        </div><div className="w-8/12 ml-36 cursor-pointer border-dashed border-2 border-gray-400 p-8 rounded-xl mt-5 flex flex-col items-center justify-center">
+
+      {!showTrans ? (
+        <>
+          <div className="mt-8 text-center">
+            <p className="text-md text-gray-400 font-normal mr-16">or</p>
+          </div>
+          <div className="w-8/12 ml-36 cursor-pointer border-dashed border-2 border-gray-400 p-8 rounded-xl mt-5 flex flex-col items-center justify-center">
             <MdOutlineCloudUpload className="text-6xl text-purple-700 mt-[-20px]" />
             <p className="mb-4 text-center text-gray-500 font-semibold">
-              Select a file or drag and drop here (Podcast Media or Transcription
-              Text)
+              Select a file or drag and drop here (Podcast Media or
+              Transcription Text)
             </p>
             <p className="mb-4 mt-[-15px] text-center text-xs text-gray-400">
               MP4, MOV, MP3, WAV, PDF, DOCX or TXT file{" "}
@@ -88,18 +92,24 @@ function ProjectSection() {
               type="file"
               id="file-upload"
               onChange={handleFileUpload}
-              className="hidden" />
+              className="hidden"
+            />
             {fileUpload && (
               <div className="mt-4">
                 <p>Selected File: {fileUpload.name}</p>
                 <p>File Type: {fileUpload.type}</p>
               </div>
             )}
-          </div></>
-       ) :(
-        <Transcript name={transcriptList.map(item => item.name)} descriptions={transcriptList.map(item => item.description)} />
-       )
-      }
+          </div>
+        </>
+      ) : (
+        <Transcript
+          name={transcriptList.map((item) => item.name)}
+          descriptions={transcriptList.map((item) => item.description)}
+          setTranscriptList={setTranscriptList}
+          transcriptList={transcriptList} 
+        />
+      )}
     </div>
   );
 }

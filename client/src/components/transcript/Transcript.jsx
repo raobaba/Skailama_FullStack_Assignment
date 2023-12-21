@@ -1,13 +1,22 @@
 import React from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 
-function Transcript({ name = [], descriptions = [] }) {
+function Transcript({ name = [], descriptions = [], setTranscriptList, transcriptList }) {
   const navigate = useNavigate();
   const { projectName } = useParams();
 
   const handleEditClick = (index) => {
     const descriptionToSend = descriptions[index];
     navigate(`/upload/${projectName}/edit-transcript`, { state: { description: descriptionToSend } });
+  };
+
+  const handleDeleteClick = (index) => {
+    console.log('Delete clicked for index:', index);
+    if (Array.isArray(transcriptList)) {
+      const updatedTranscripts = transcriptList.filter((_, i) => i !== index);
+      console.log('Updated Transcripts:', updatedTranscripts);
+      setTranscriptList(updatedTranscripts);
+    }
   };
   return (
     <div className="ml-16 mt-4">
@@ -50,7 +59,9 @@ function Transcript({ name = [], descriptions = [] }) {
                   >
                     Edit
                   </button>
-                  <button className="border w-16 h-7 text-sm font-medium cursor-pointer text-red-900">
+                  <button 
+                   onClick={() => handleDeleteClick(index)}
+                  className="border w-16 h-7 text-sm font-medium cursor-pointer text-red-900">
                     Delete
                   </button>
                 </td>
