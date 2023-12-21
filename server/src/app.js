@@ -7,6 +7,7 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 const Connection = require('./config/db.js')
 const userRouter = require('./routes/user.route.js');
+const uploadRouter = require('./routes/upload.route.js');
 const app = express();
 
 app.use(express.static("public"));
@@ -22,6 +23,7 @@ app.use(
 app.use(cors());
 Connection();
 app.use('/api/v1',userRouter)
+app.use('/api/v1',uploadRouter)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "server/build")));
 

@@ -46,11 +46,11 @@ function NewProject({ projectName = [], openModal }) {
                 )}
               </div>
               <div className=" mr-2 mt-[-15px] ">
-                <p className="text-purple-700 text-lg font-bold whitespace-nowrap truncate">
+                <p className="text-purple-700 mt-3 text-lg font-bold whitespace-nowrap truncate">
                   {project}
                 </p>
-                <p className="text-sm font-semibold ">4 episodes</p>
-                <p className="text-xs mt-2 font-semibold text-gray-500 ">
+                <p className="text-sm font-normal ">4 episodes</p>
+                <p className="text-xs mt-4 font-normal text-gray-400 ">
                   created a week age
                 </p>
               </div>

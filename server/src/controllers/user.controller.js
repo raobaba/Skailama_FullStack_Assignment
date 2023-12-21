@@ -6,32 +6,32 @@ const cloudinary = require("cloudinary");
 const asyncHandler = require("../middlewares/asyncHandler.middleware.js");
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, email, password } = req.body;
-  const existingUser = await User.findOne({ email });
-  if (existingUser) {
-    return res.status(400).json({ message: "Email already exists." });
-  }
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const myCloud = await cloudinary.uploader.upload(
-    req.files.avatar.tempFilePath,
-    {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
+    const { username, email, password } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already exists." });
     }
-  );
-  const user = await User.create({
-    username,
-    email,
-    password: hashedPassword,
-    avatar: {
-      public_id: myCloud.public_id,
-      url: myCloud.secure_url,
-    },
+    const hashedPassword = await bcrypt.hash(password, 10); 
+    const myCloud = await cloudinary.uploader.upload(
+      req.files.avatar.tempFilePath,
+      {
+        folder: "avatars",
+        width: 150,
+        crop: "scale",
+      }
+    );
+    const user = await User.create({
+      username,
+      email,
+      password: hashedPassword, 
+      avatar: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
+    });
+    sendToken(user, 200, res);
   });
-  sendToken(user, 200, res);
-});
-
+  
 const loginUser = asyncHandler(async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -69,17 +69,23 @@ const logoutUser = asyncHandler(async (req, res) => {
     expires: new Date(0),
     sameSite: "strict",
   });
+  res.clearCookie("userId", {
+    httpOnly: true,
+    expires: new Date(0),
+    sameSite: "strict",
+  });
   res.status(200).json({ status: 200, message: "Logged out successfully" });
 });
 
 const getUserById = asyncHandler(async (req, res) => {
-  const userId = req.params.id;
-  const user = await User.findById(userId).select("-password");
+  const userId = req.params.id; 
+  const user = await User.findById(userId).select("-password"); 
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   }
   res.status(200).json({ status: 200, user });
 });
+
 
 const updateUserDetails = asyncHandler(async (req, res) => {
   const userId = req.params.id;
@@ -118,10 +124,6 @@ const updateUserDetails = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = {
-  registerUser,
-  loginUser,
-  logoutUser,
-  getUserById,
-  updateUserDetails,
-};
+
+
+module.exports = { registerUser, loginUser, logoutUser, getUserById, updateUserDetails };
