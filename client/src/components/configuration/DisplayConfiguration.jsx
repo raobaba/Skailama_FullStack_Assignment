@@ -6,6 +6,7 @@ function DisplayConfiguration() {
   const [isToggled, setIsToggled] = useState(false);
   const [primaryColor, setPrimaryColor] = useState("#000000");
   const [fontColor, setFontColor] = useState("#000000");
+  const [selectedImage, setSelectedImage] = useState(null);
   const handlePrimaryColorChange = (event) => {
     setPrimaryColor(event.target.value);
   };
@@ -14,6 +15,22 @@ function DisplayConfiguration() {
   };
   const toggle = () => {
     setIsToggled(!isToggled);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleButtonClick = () => {
+    document.getElementById("file-upload").click();
   };
   
   return (
@@ -184,18 +201,35 @@ function DisplayConfiguration() {
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-full  h-28">
-        <h1 className="font-bold text-xl">Bot Icon</h1>
-        <div className="flex mt-5 items-center">
-          <div className="w-16 h-16 rounded-full border bg-gray-300"></div>
-          <label htmlFor="file-upload" className="ml-3 cursor-pointer">
-            <input id="file-upload" type="file" className="hidden" />
-            <button className="bg-purple-700 text-white px-1 py-1 flex rounded-md">
-              Upload Image <RxUpload size={20} className="ml-2" />
-            </button>
-          </label>
+      <div className="mx-auto max-w-full h-28">
+      <h1 className="font-bold text-xl">Bot Icon</h1>
+      <div className="flex mt-5 items-center">
+        <div className="w-16 h-16 rounded-full border bg-gray-300 relative overflow-hidden">
+          {selectedImage ? (
+            <img
+              src={selectedImage}
+              alt="Selected"
+              className="w-full h-full rounded-full object-cover"
+            />
+          ) : null}
         </div>
+        <label htmlFor="file-upload" className="ml-3 cursor-pointer">
+          <input
+            id="file-upload"
+            type="file"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+          <button 
+          onClick={handleButtonClick}
+          className="bg-purple-700 text-white text-sm px-2 py-2 flex rounded-md">
+            Upload Image
+            {/* Replace RxUpload with your icon component */}
+            <RxUpload size={20} className="ml-2" />
+          </button>
+        </label>
       </div>
+    </div>
     </div>
   );
 }
