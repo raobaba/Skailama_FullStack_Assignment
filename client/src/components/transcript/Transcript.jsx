@@ -5,8 +5,9 @@ function Transcript({ name = [], descriptions = [] }) {
   const navigate = useNavigate();
   const { projectName } = useParams();
 
-  const handleEditClick = (descriptions) => {
-    navigate(`/upload/${projectName}/edit-transcript`, { state: { descriptions } });
+  const handleEditClick = (index) => {
+    const descriptionToSend = descriptions[index];
+    navigate(`/upload/${projectName}/edit-transcript`, { state: { description: descriptionToSend } });
   };
   return (
     <div className="ml-16 mt-4">
@@ -45,7 +46,7 @@ function Transcript({ name = [], descriptions = [] }) {
                 <td className="border-b border-r flex pl-12 py-2 shadow-border">
                   <button
                     className="border w-10 h-7 text-sm font-medium cursor-pointer"
-                    onClick={() => handleEditClick(descriptions)}
+                    onClick={() => handleEditClick(index)}
                   >
                     Edit
                   </button>

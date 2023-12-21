@@ -45,6 +45,8 @@ const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem }) => {
     }
 
     addTranscript({ name, description });
+    setName('');
+    setDescription('');
     onClose();
   };
 
@@ -63,6 +65,7 @@ const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem }) => {
           <input
             type="text"
             id="name"
+            value={name}
             placeholder="Type here..."
             onChange={handleNameInputChange}
             className="border rounded w-full py-2 px-3 mb-3"
@@ -73,8 +76,9 @@ const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem }) => {
           </label>
           <input
             type="text"
-            id="link"
+            id="description"
             placeholder="Type here..."
+            value={description}
             onChange={handleLinkInputChange}
             className="border rounded w-full py-2 px-3 mb-3"
           />
