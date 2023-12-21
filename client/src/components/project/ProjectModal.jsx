@@ -32,6 +32,7 @@ const ProjectModal = ({ isOpen, onClose, addProject }) => {
       return;
     }
     addProject(projectName);
+    setProjectName('');
     onClose();
   };
 

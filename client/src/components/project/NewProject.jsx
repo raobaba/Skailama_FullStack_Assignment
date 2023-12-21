@@ -36,7 +36,7 @@ function NewProject({ projectName = [], openModal }) {
               <div className="mr-8 ml-2 w-20 h-20 border border-slate-500 rounded-xl bg-purple-700">
                 {project.includes(" ") ? (
                   project.split(" ").map((word, index) => (
-                    <span key={index} className=" text-6xl text-white ml-1 ">
+                    <span key={index} className=" text-6xl text-white">
                       {word[0].toUpperCase()}
                     </span>
                   ))

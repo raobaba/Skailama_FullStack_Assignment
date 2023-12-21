@@ -7,7 +7,7 @@ const isLoggedIn = asyncHandler(async (req, res, next) => {
   if (!token) {
     return res
       .status(401)
-      .json({ message: "Logged in first to do this operation" });
+      .json({ message: "Logged in first !" });
   }
 
   try {

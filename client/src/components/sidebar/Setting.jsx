@@ -4,7 +4,7 @@ function Setting() {
   return (
     <div>
       <div className=" ml-14 flex items-center">
-        <div className="w-20 h-20 rounded-full border bg-gray-300 mr-4"></div>
+        <div className="w-20 h-20 rounded-full border bg-gray-300 mr-4 cursor-pointer"></div>
         <div className="flex justify-center gap-5">
           <input
             type="text"

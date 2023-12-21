@@ -6,7 +6,7 @@ import Home from "../components/Home";
 import Project from "../components/project/Project.jsx";
 import Upload from "../components/upload/Upload.jsx";
 import ProjectSection from "../components/sidebar/ProjectSection.jsx";
-import Configuration from '../components/sidebar/Configuration.jsx'
+import Configuration from '../components/sidebar/Configuration.jsx';
 import Deployment from '../components/sidebar/Deployment.jsx';
 import Pricing from '../components/sidebar/Pricing.jsx';
 import Setting from '../components/sidebar/Setting.jsx';
@@ -21,15 +21,14 @@ function Routing() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/project" element={<Project />} />
       <Route path="/upload/:projectName/*" element={<Upload />}>
-      <Route index element={<UploadSidebar />} />
-        <Route path="project-section" element={<ProjectSection/>} />
+        <Route index element={<UploadSidebar />} />
+        <Route path="project-section" element={<ProjectSection />} />
         <Route path="configurations" element={<Configuration />} />
         <Route path="deployment" element={<Deployment />} />
         <Route path="pricing" element={<Pricing />} />
-        <Route path="edit-transcript" element={<EditTranscript/>} />
+        <Route path="edit-transcript" element={<EditTranscript />} />
         <Route path="settings" element={<Setting />} />
       </Route>
-      
     </Routes>
   );
 }

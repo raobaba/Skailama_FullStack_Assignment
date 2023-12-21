@@ -14,7 +14,7 @@ const API = {
   },
   signInUser: async (userData) => {
     try {
-      const response = await axios.post(`${API_URL}/login`, userData); // Update '/login' with your actual login endpoint
+      const response = await axios.post(`${API_URL}/login`, userData); 
       return response.data;
     } catch (error) {
       throw new Error(error.message);
