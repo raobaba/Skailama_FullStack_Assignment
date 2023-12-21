@@ -1,5 +1,5 @@
 # Getting Started with Create React App
-
+if possible then minimize this code and write in more readable format clean , industry standard type and during this don't loose the previous code and feature and logic don't means don't and write complete code don't left any thing to me , take time but write complete code 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

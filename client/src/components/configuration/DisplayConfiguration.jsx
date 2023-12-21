@@ -4,7 +4,14 @@ import { RxUpload } from "react-icons/rx";
 
 function DisplayConfiguration() {
   const [isToggled, setIsToggled] = useState(false);
-
+  const [primaryColor, setPrimaryColor] = useState("#000000");
+  const [fontColor, setFontColor] = useState("#000000");
+  const handlePrimaryColorChange = (event) => {
+    setPrimaryColor(event.target.value);
+  };
+  const handleFontColorChange = (event) => {
+    setFontColor(event.target.value);
+  };
   const toggle = () => {
     setIsToggled(!isToggled);
   };
@@ -12,8 +19,8 @@ function DisplayConfiguration() {
     <div className="overflow-y-scroll max-h-[410px]">
       <div className="mx-auto max-w-full h-[70%] ">
         <div className="mx-auto max-w-full flex justify-center h-28">
-          <div className=" mt-4 sm:w-1/2">
-            <label className="font-semibold" htmlFor="primaryColor">
+          <div className="mt-4 sm:w-1/2">
+            <label className="font-semibold text-gray-500" htmlFor="primaryColor">
               Primary Color
             </label>
             <div className="flex">
@@ -21,8 +28,15 @@ function DisplayConfiguration() {
                 type="text"
                 placeholder="Choose"
                 className="w-5/6 mr-2 px-2 py-1 my-1 border rounded"
+                value={primaryColor}
+                onChange={(e) => setPrimaryColor(e.target.value)}
               />
-              <input type="color" className="w-12 h-10 rounded-xl" />
+              <input
+                type="color"
+                className="w-12 h-10 rounded-xl"
+                value={primaryColor}
+                onChange={handlePrimaryColorChange}
+              />
             </div>
             <span className="text-gray-500 text-xs">
               Lorem ipsum dolor sit amet
@@ -30,7 +44,7 @@ function DisplayConfiguration() {
           </div>
 
           <div className=" mt-4 sm:w-1/2">
-            <label className="font-semibold ml-10" htmlFor="primaryColor">
+            <label className="font-semibold ml-10 text-gray-500" htmlFor="primaryColor">
               Font Color
             </label>
             <div className="flex">
@@ -38,8 +52,15 @@ function DisplayConfiguration() {
                 type="text"
                 placeholder="Choose"
                 className="w-10/12 mr-2 px-2 ml-10 py-1 my-1 border rounded"
+                value={fontColor}
+                onChange={(e) => setFontColor(e.target.value)}
               />
-              <input type="color" className="w-12 h-10 rounded-xl" />
+              <input 
+              type="color" 
+              className="w-12 h-10 rounded-xl" 
+              value={fontColor}
+              onChange={handleFontColorChange}
+              />
             </div>
             <span className="text-gray-500 text-xs ml-10">
               Lorem ipsum dolor sit amet
@@ -48,7 +69,7 @@ function DisplayConfiguration() {
         </div>
         <div className="mx-auto max-w-full flex justify-center h-28">
           <div className=" mt-4 sm:w-1/2">
-            <label className="font-semibold" htmlFor="primaryColor">
+            <label className="font-semibold text-gray-500" htmlFor="primaryColor">
               Font Size (in px)
             </label>
             <div className="flex">
@@ -63,7 +84,7 @@ function DisplayConfiguration() {
             </span>
           </div>
           <div className=" mt-4 sm:w-1/2">
-            <label className="font-semibold ml-10" htmlFor="primaryColor">
+            <label className="font-semibold ml-10 text-gray-500" htmlFor="primaryColor">
               Chat Height (in % of total screen)
             </label>
             <div className="flex">
@@ -104,7 +125,7 @@ function DisplayConfiguration() {
       <div className="mx-auto max-w-full h-48">
         <div className="mx-auto max-w-full flex justify-center h-20">
           <div className=" mt-4 sm:w-1/2">
-            <label className="font-semibold" htmlFor="primaryColor">
+            <label className="font-semibold text-gray-500" htmlFor="primaryColor">
               Chat Icon Size
             </label>
             <div className="flex">
@@ -120,7 +141,7 @@ function DisplayConfiguration() {
           </div>
 
           <div className=" mt-4 sm:w-1/2">
-            <label className="font-semibold ml-10" htmlFor="primaryColor">
+            <label className="font-semibold text-gray-500 ml-10" htmlFor="primaryColor">
               Position on Screen
             </label>
             <div className="flex">
@@ -137,7 +158,7 @@ function DisplayConfiguration() {
         </div>
         <div className="mx-auto max-w-full flex justify-center h-20">
           <div className=" mt-4 sm:w-1/2">
-            <label className="font-semibold" htmlFor="primaryColor">
+            <label className="font-semibold text-gray-500" htmlFor="primaryColor">
               Distance from Bottom (in px)
             </label>
             <div className="flex">
@@ -149,7 +170,7 @@ function DisplayConfiguration() {
             </div>
           </div>
           <div className=" mt-4 sm:w-1/2">
-            <label className="font-semibold ml-10" htmlFor="primaryColor">
+            <label className="font-semibold text-gray-500 ml-10" htmlFor="primaryColor">
               Horizontal Distance (in px)
             </label>
             <div className="flex">
@@ -169,9 +190,8 @@ function DisplayConfiguration() {
           <label htmlFor="file-upload" className="ml-3 cursor-pointer">
             <input id="file-upload" type="file" className="hidden" />
             <button className="bg-purple-700 text-white px-1 py-1 flex rounded-md">
-              Upload Image <RxUpload size={20} className="ml-2"/>
+              Upload Image <RxUpload size={20} className="ml-2" />
             </button>
-            
           </label>
         </div>
       </div>

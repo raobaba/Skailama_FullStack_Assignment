@@ -57,8 +57,8 @@ const EditTranscript = () => {
       </div>
       {editMode ? (
   <div className="border border-gray-300 mt-5 pb-2 rounded-md p-2 w-full h-96 resize-y">
-    <button className="mt-2 px-3 py-1 w-20 h-8 flex bg-black text-white rounded-3xl">
-      <FaPen className="mt-1" />
+    <button className="px-3 mt-1 py-1 w-20 h-8 flex bg-black text-white rounded-3xl" onClick={handleEditClick}>
+      <FaPen className="mt-1 mr-2" />
       edit
     </button>
     <textarea
@@ -74,7 +74,7 @@ const EditTranscript = () => {
       <FaPen className="mt-1 mr-2" />
       edit
     </button>
-    <div className="rounded-md p-2 w-full border h-80 mt-3 resize-y">
+    <div className="rounded-md p-2 w-full h-80 mt-3 resize-y">
       {editedDescription}
     </div>
   </div>

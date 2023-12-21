@@ -44,9 +44,9 @@ function UploadSidebar() {
           </Link>
           <p className="ml-8 mt-6 font-semibold">Podcast upload flow</p>
         </div>
-        <div>
+        <div className="mt-5">
           <Link
-            className={`flex mt-2 items-center w-11/12 py-3 px-5 mx-2 rounded-3xl ${
+            className={`flex mt-2 items-center w-10/12 py-2 px-2 mx-5 rounded-3xl ${
               activeSection === "project-section"
                 ? "bg-purple-700 text-white"
                 : "hover:bg-gray-200"
@@ -54,13 +54,13 @@ function UploadSidebar() {
             to={`/upload/${projectName}/project-section`}
             onClick={() => handleSetActive("project-section")}
           >
-            <div class="flex justify-center items-center h-6 w-6 rounded-full bg-gray-300">
-              <RiNumber1 size={12} className="text-slate-600" />
+            <div class="flex justify-center items-center h-7 w-7 rounded-full bg-gray-300">
+              <RiNumber1 size={12} className="text-slate-950" />
             </div>
             <p className="ml-2">Projects</p>
           </Link>
           <Link
-            className={`flex mt-2 items-center w-11/12 py-3 px-5 mx-2 rounded-3xl ${
+            className={`flex mt-2 items-center w-10/12 py-2 px-2 mx-5 rounded-3xl ${
               activeSection === "configurations"
                 ? "bg-purple-700 text-white"
                 : "hover:bg-gray-200"
@@ -68,13 +68,13 @@ function UploadSidebar() {
             to={`/upload/${projectName}/configurations`}
             onClick={() => handleSetActive("configurations")}
           >
-             <div class="flex justify-center items-center h-6 w-6 rounded-full bg-gray-300">
+             <div class="flex justify-center items-center h-7 w-7 rounded-full bg-gray-300">
               <RiNumber2 size={12} className="text-slate-700" />
             </div>
             <p className="ml-2">Winget Configurations</p>
           </Link>
           <Link
-            className={`flex mt-2 items-center w-11/12 py-3 px-5 mx-2 rounded-3xl ${
+            className={`flex mt-2 items-center w-10/12 py-2 px-2 mx-5 rounded-3xl ${
               activeSection === "deployment"
                 ? "bg-purple-700 text-white"
                 : "hover:bg-gray-200"
@@ -82,13 +82,13 @@ function UploadSidebar() {
             to={`/upload/${projectName}/deployment`}
             onClick={() => handleSetActive("deployment")}
           >
-             <div class="flex justify-center items-center h-6 w-6 rounded-full bg-gray-300">
+             <div class="flex justify-center items-center h-7 w-7 rounded-full bg-gray-300">
               <RiNumber3 size={12} className="text-slate-700" />
             </div>
             <p className="ml-2">Deployment</p>
           </Link>
           <Link
-            className={`flex mt-2 items-center w-11/12 py-3 px-5 mx-2 rounded-3xl ${
+            className={`flex mt-2 items-center w-10/12 py-2 px-2 mx-5 rounded-3xl ${
               activeSection === "pricing"
                 ? "bg-purple-700 text-white"
                 : "hover:bg-gray-200"
@@ -96,17 +96,19 @@ function UploadSidebar() {
             to={`/upload/${projectName}/pricing`}
             onClick={() => handleSetActive("pricing")}
           >
-            <div class="flex justify-center items-center h-6 w-6 rounded-full bg-gray-300">
+            <div class="flex justify-center items-center h-7 w-7 rounded-full bg-gray-300">
               <RiNumber4 size={12} className="text-slate-700" />
             </div>
 
             <p className="ml-2">Pricing</p>
           </Link>
+          <hr className="border-gray-300 mt-2 w-9/12 pb-10 ml-8" />
         </div>
       </div>
       <div>
+      <hr className="border-gray-300 w-9/12 ml-8" />
         <Link
-          className={`flex items-center w-11/12 py-3 px-5 mx-2 rounded-3xl border-slate-500 ${
+          className={`flex mt-2 items-center w-10/12 py-2 px-2 mx-5 rounded-3xl mb-1 ${
             activeSection === "settings"
               ? "bg-purple-700 text-white"
               : "hover:bg-gray-200"
