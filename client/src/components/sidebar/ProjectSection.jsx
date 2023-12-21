@@ -4,13 +4,13 @@ import Spotify from "../../assets/images/spotify.png";
 import RSS from "../../assets/images/RSS.png";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import UploadModal from "../upload/UploadModal";
+import Transcript from "../upload/Transcript";
 
 function ProjectSection() {
   const [fileUpload, setFileUpload] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [desc, setDesc] = useState("");
-  const [show, setShow] = useState(false);
+  const [showTrans, setShowTrans] = useState(false);
+  const [transcriptList, setTranscriptList] = useState([]); 
   const [selectedItem, setSelectedItem] = useState({});
 
   const openModal = (item) => {
@@ -23,10 +23,11 @@ function ProjectSection() {
     setIsModalOpen(false);
   };
 
-  const addProject = (name) => {
-    setName([...name, name]);
-    setShow(true);
+  const addTranscript = (newTranscript) => {
+    setTranscriptList([...transcriptList, newTranscript]);
+    setShowTrans(true);
   };
+  
 
   const handleFileUpload = (event) => {
     const uploadedFile = event.target.files[0];
@@ -60,41 +61,45 @@ function ProjectSection() {
       <UploadModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        addProject={addProject}
+        addTranscript={addTranscript}
         selectedItem={selectedItem}
       />
-      <div className="mt-8 text-center">
-        <p className="text-md text-gray-400 font-normal mr-16">or</p>
-      </div>
-      <div className="w-8/12 ml-36 cursor-pointer border-dashed border-2 border-gray-400 p-8 rounded-xl mt-5 flex flex-col items-center justify-center">
-        <MdOutlineCloudUpload className="text-6xl text-purple-700 mt-[-20px]" />
-        <p className="mb-4 text-center text-gray-500 font-semibold">
-          Select a file or drag and drop here (Podcast Media or Transcription
-          Text)
-        </p>
-        <p className="mb-4 mt-[-15px] text-center text-xs text-gray-400">
-          MP4, MOV, MP3, WAV, PDF, DOCX or TXT file{" "}
-        </p>
+      
+       {!showTrans ? (
+           <><div className="mt-8 text-center">
+          <p className="text-md text-gray-400 font-normal mr-16">or</p>
+        </div><div className="w-8/12 ml-36 cursor-pointer border-dashed border-2 border-gray-400 p-8 rounded-xl mt-5 flex flex-col items-center justify-center">
+            <MdOutlineCloudUpload className="text-6xl text-purple-700 mt-[-20px]" />
+            <p className="mb-4 text-center text-gray-500 font-semibold">
+              Select a file or drag and drop here (Podcast Media or Transcription
+              Text)
+            </p>
+            <p className="mb-4 mt-[-15px] text-center text-xs text-gray-400">
+              MP4, MOV, MP3, WAV, PDF, DOCX or TXT file{" "}
+            </p>
 
-        <label
-          htmlFor="file-upload"
-          className="cursor-pointer border text-purple-700 border-purple-700 py-2 px-4 rounded-3xl"
-        >
-          Select File
-        </label>
-        <input
-          type="file"
-          id="file-upload"
-          onChange={handleFileUpload}
-          className="hidden"
-        />
-        {fileUpload && (
-          <div className="mt-4">
-            <p>Selected File: {fileUpload.name}</p>
-            <p>File Type: {fileUpload.type}</p>
-          </div>
-        )}
-      </div>
+            <label
+              htmlFor="file-upload"
+              className="cursor-pointer border text-purple-700 border-purple-700 py-2 px-4 rounded-3xl"
+            >
+              Select File
+            </label>
+            <input
+              type="file"
+              id="file-upload"
+              onChange={handleFileUpload}
+              className="hidden" />
+            {fileUpload && (
+              <div className="mt-4">
+                <p>Selected File: {fileUpload.name}</p>
+                <p>File Type: {fileUpload.type}</p>
+              </div>
+            )}
+          </div></>
+       ) :(
+        <Transcript name={transcriptList.map(item => item.name)} descriptions={transcriptList.map(item => item.description)} />
+       )
+      }
     </div>
   );
 }

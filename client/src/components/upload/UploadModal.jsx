@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const UploadModal = ({ isOpen, onClose, addProject, selectedItem }) => {
-  const [projectName, setProjectName] = useState('');
-  const [projectLink, setProjectLink] = useState('');
+const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem }) => {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [nameError, setNameError] = useState('');
   const [linkError, setLinkError] = useState('');
   const modalRef = useRef(null);
@@ -24,27 +24,27 @@ const UploadModal = ({ isOpen, onClose, addProject, selectedItem }) => {
   }, [isOpen, onClose]);
 
   const handleNameInputChange = (e) => {
-    setProjectName(e.target.value);
+    setName(e.target.value);
     setNameError('');
   };
 
   const handleLinkInputChange = (e) => {
-    setProjectLink(e.target.value);
+    setDescription(e.target.value);
     setLinkError('');
   };
 
   const handleSubmit = () => {
-    if (projectName.trim() === '') {
+    if (name.trim() === '') {
       setNameError("Name field can't be empty");
       return;
     }
 
-    if (projectLink.trim() === '') {
+    if (description.trim() === '') {
       setLinkError("Link field can't be empty");
       return;
     }
 
-    addProject({ projectName, projectLink });
+    addTranscript({ name, description });
     onClose();
   };
 
