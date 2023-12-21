@@ -1,6 +1,5 @@
-import React from "react";
-import { useRef } from "react";
-
+import React, { useState, useRef, useEffect } from "react";
+import { API } from "../../utils/Api.js";
 function Setting() {
   const fileInputRef = useRef(null);
 
@@ -12,10 +11,39 @@ function Setting() {
     const selectedFile = event.target.files[0];
     console.log("Selected file:", selectedFile);
   };
+
+  const [userDetails, setUserDetails] = useState({
+    username: '',
+    email: '',
+    avatar: '', 
+  });
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const userId = '6584879ded3b9c4185e146be'; 
+        const userData = await API.getUserById(userId);
+        const details = await userData.user;
+        setUserDetails({
+          username: details.username,
+          email: details.email,
+          avatar: details.avatar.url, 
+        });
+      } catch (error) {
+        console.error('Error fetching user details:', error.message);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
+ console.log(userDetails)
+
   return (
     <div>
       <div className=" ml-14 flex items-center">
-        <div className="w-20 h-20 rounded-full border bg-gray-300 mr-4 cursor-pointer" onClick={handleFileClick} ></div>
+        <div className="w-20 h-20 rounded-full border bg-gray-300 mr-4 cursor-pointer" onClick={handleFileClick} >
+          <img src={userDetails.avatar} alt="" />
+        </div>
         <div className="flex justify-center gap-5">
           <input
             type="file"
@@ -27,16 +55,19 @@ function Setting() {
             type="text"
             className="border border-gray-400 rounded-md px-2 py-1"
             placeholder="username"
+            value={userDetails.username}
+            readOnly
           />
           <input
             type="text"
             className="border border-gray-400 rounded-md px-2 py-1"
             placeholder="email"
+            value={userDetails.email}
+            readOnly
           />
           <button
             type="submit"
             className="border border-purple-900 text-purple-700 font-semibold rounded-md px-2 py-1"
-            placeholder="email"
           >
             Update
           </button>

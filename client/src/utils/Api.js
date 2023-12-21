@@ -20,6 +20,22 @@ const API = {
       throw new Error(error.message);
     }
   },
+  getUserById: async (userId) => {
+    try {
+      const response = await axios.get(`${API_URL}/getById/${userId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  updateUserDetails: async (userId, userData) => {
+    try {
+      const response = await axios.put(`${API_URL}/users/${userId}`, userData);
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }  
 };
 
 export {API};
