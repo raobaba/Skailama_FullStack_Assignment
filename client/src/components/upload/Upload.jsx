@@ -30,6 +30,8 @@ function Upload() {
     ? "/ Deployment"
     : lastSegment === "settings"
     ? "/ Account Settings"
+    : lastSegment === "edit-transcript"
+    ? "/ Transcript"
     : "";
 
   return (
