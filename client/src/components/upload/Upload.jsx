@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useParams, useLocation } from "react-router-dom";
 import MetaData from "../../utils/Metadata";
 import UploadSidebar from "./UploadSidebar";
@@ -8,6 +8,7 @@ import { TiArrowSortedDown } from "react-icons/ti";
 import EN from "../../assets/images/EN-icon.png";
 
 function Upload() {
+
   const { projectName } = useParams();
   const location = useLocation();
 
@@ -15,21 +16,22 @@ function Upload() {
   const lastSegment = segments[segments.length - 1];
 
   useEffect(() => {
-    console.log("Last segment:", lastSegment);
+    // console.log("Last segment:", lastSegment);
   }, [lastSegment]);
 
   const displaySegment =
   lastSegment === "project-section"
-    ? "Upload"
+    ? "/ Upload"
     : lastSegment === "configurations"
-    ? "Configuration"
+    ? "/ Configuration"
     : lastSegment === "pricing"
-    ? "Pricing"
+    ? "/ Pricing"
     : lastSegment === "deployment"
-    ? "Deployment"
+    ? "/ Deployment"
     : lastSegment === "settings"
-    ? "Account Settings"
+    ? "/ Account Settings"
     : "";
+
   return (
     <>
       <MetaData title={"Skai Lama | upload"} />
@@ -47,7 +49,7 @@ function Upload() {
               </span>
               <span className="text-purple-700 text-md font-semibold ml-2">
                 {" "}
-                / {displaySegment}
+                {displaySegment}
               </span>
             </div>
             <div className="flex items-center">

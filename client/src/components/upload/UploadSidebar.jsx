@@ -3,7 +3,6 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import Top from "../../assets/images/Vector1.png";
 import Bottom from "../../assets/images/Vector.png";
 import { RiNumber1, RiNumber2, RiNumber3, RiNumber4 } from "react-icons/ri";
-
 import { RiSettings5Line } from "react-icons/ri";
 
 function UploadSidebar() {
@@ -57,7 +56,7 @@ function UploadSidebar() {
             onClick={() => handleSetActive("project-section")}
           >
             <div class="flex justify-center items-center h-6 w-6 rounded-full bg-gray-300">
-              <RiNumber1 size={12} className="text-slate-700" />
+              <RiNumber1 size={12} className="text-slate-600" />
             </div>
             <p className="ml-2">Projects</p>
           </Link>
