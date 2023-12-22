@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { API } from "../../utils/Api.js";
 import Cookies from "js-cookie";
 
 function Transcript({ fetchData, details ,setDetails }) {
   const navigate = useNavigate();
+  const {projectName} = useParams();
 
   const handleEditClick = (item) => {
-    console.log("Update clicked for detailId:", item);
-    const detaildId = item._id;
-    const description = item.description;
-    const uploadId = Cookies.get("uploadId");
-    const fileId = Cookies.get("fileId");
-    const nameToSend = details[detaildId];
-    navigate(`/upload/${item}/edit-transcript`, {
-      state: { name: nameToSend },
+    const detailId = item._id;
+    Cookies.set('detailId', detailId);
+    const descriptionToSend = item.description; 
+    navigate(`/upload/${projectName}/edit-transcript`, {
+      state: { description: descriptionToSend },
     });
   };
 

@@ -59,7 +59,7 @@ const API = {
   },
   updateDetails: async (uploadId, fileId, detailId,description) => {
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `${API_URL}/update/${uploadId}/${fileId}/${detailId}`,{description}
       );
       return response.data;

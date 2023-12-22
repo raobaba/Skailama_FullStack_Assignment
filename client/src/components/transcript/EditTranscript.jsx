@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { FaPen } from "react-icons/fa";
 import { MdSearch } from "react-icons/md";
+import { API } from "../../utils/Api.js";
+import Cookies from "js-cookie";
 
 const EditTranscript = () => {
   const location = useLocation();
@@ -12,8 +14,20 @@ const EditTranscript = () => {
   const navigate = useNavigate();
   const { projectName } = useParams();
 
-  const handleReturnToTranscript = () => {
-    navigate(`/upload/${projectName}/project-section`);
+  const updateDescription = async () => {
+    const uploadId = Cookies.get("uploadId");
+    const fileId = Cookies.get("fileId");
+    const detailId = Cookies.get('detailId');
+     console.log(uploadId)
+     console.log(fileId)
+     console.log(detailId)
+    try {
+      await API.updateDetails(uploadId, fileId, detailId, editedDescription);
+      console.log("success")
+      navigate(`/upload/${projectName}/project-section`);
+    } catch (error) {
+      console.error("Error updating description:", error);
+    }
   };
 
   const handleEditClick = () => {
@@ -48,7 +62,7 @@ const EditTranscript = () => {
               </button>
               <button
                 className="text-xl font-bold border px-4 py-2 rounded-md bg-slate-950 text-white hover:bg-purple-800 transition duration-300 ease-in-out"
-                onClick={handleReturnToTranscript}
+                onClick={updateDescription}
               >
                 Save & Exit
               </button>
