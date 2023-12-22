@@ -5,8 +5,8 @@ const Upload = require("../models/upload.model.js");
 const { uploadItems } = require("../constants.js");
 
 const createUpload = asyncHandler(async (req, res) => {
-  const { projectName, episode } = req.body;
-  const userId = req.cookies.userId;
+  const { projectName } = req.body;
+  const userId = req.params.userId;
 
   if (!userId) {
     return res
@@ -20,10 +20,9 @@ const createUpload = asyncHandler(async (req, res) => {
 
   const newUpload = new Upload({
     projectName,
-    episode,
+    userId,
     timeStamp: kolkataTime,
     files: uploadItems,
-    userId,
   });
 
   const savedUpload = await newUpload.save();
@@ -73,7 +72,7 @@ const updateDescription = async (req, res) => {
     }
     console.log(detailsToUpdate);
     detailsToUpdate.description = description;
-    await upload.save(); // Save the 'upload' object, not the Upload model itself
+    await upload.save(); 
     res.status(200).json({ upload });
   } catch (err) {
     res
@@ -83,7 +82,7 @@ const updateDescription = async (req, res) => {
 };
 
 const getAllUpload = async (req,res)=>{
-  const userId = req.cookies.userId;
+  const userId = req.params.userId;
 
   if (!userId) {
     return res
@@ -91,7 +90,7 @@ const getAllUpload = async (req,res)=>{
       .json({ message: "Please login to perform this action." });
   }
   try {
-    const uploads = await Upload.find({ userId }); 
+    const uploads = await Upload.find(); 
     res.status(200).json({ uploads });
   } catch (err) {
     res
@@ -100,9 +99,47 @@ const getAllUpload = async (req,res)=>{
   }
 }
 
+const getFilesByUploadId = async (req, res) => {
+  const uploadId = req.params.uploadId;
+
+  try {
+    const upload = await Upload.findById(uploadId);
+    if (!upload) {
+      return res.status(404).json({ message: "Upload not found." });
+    }
+    const files = upload.files;
+    res.status(200).json({ files });
+  } catch (err) {
+    res.status(500).json({ message: "Error retrieving files.", error: err.message });
+  }
+};
+
+const getDetailsByFileId = async (req, res) => {
+  const { uploadId, fileId } = req.params;
+
+  try {
+    const upload = await Upload.findById(uploadId);
+    if (!upload) {
+      return res.status(404).json({ message: "Upload not found." });
+    }
+
+    const file = upload.files.id(fileId);
+    if (!file) {
+      return res.status(404).json({ message: "File not found." });
+    }
+
+    const details = file.details;
+    res.status(200).json({ details });
+  } catch (err) {
+    res.status(500).json({ message: "Error retrieving details.", error: err.message });
+  }
+};
+
 module.exports = {
   createUpload,
   createDetails,
   updateDescription,
-  getAllUpload
+  getAllUpload,
+  getFilesByUploadId,
+  getDetailsByFileId 
 };
