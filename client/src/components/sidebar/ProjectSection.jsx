@@ -9,9 +9,25 @@ function ProjectSection() {
   const [fileUpload, setFileUpload] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showTrans, setShowTrans] = useState(false);
-  const [transcriptList, setTranscriptList] = useState([]);
   const [selectedItem, setSelectedItem] = useState({});
   const [uploadFile,setUploadFile] = useState([])
+  const [details, setDetails] = useState([]);
+
+  
+  const fetchData = async () => {
+    try {
+      const uploadId = Cookies.get('uploadId');
+      const fileId = Cookies.get('fileId');
+      console.log(uploadId)
+      console.log(fileId);
+      const response = await API.getAllDetailsByFileId(uploadId, fileId);
+      console.log("ressponse",response)
+      setDetails(response.details); 
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+      setDetails([]); 
+    }
+  };
 
   const openModal = (item) => {
     setIsModalOpen(true);
@@ -24,9 +40,10 @@ function ProjectSection() {
     setIsModalOpen(false);
   };
 
+
   const addTranscript = (newTranscript) => {
-    setTranscriptList([
-      ...transcriptList,
+    setDetails([
+      ...details,
       { name: newTranscript.name, description: newTranscript.description },
     ]);
     setShowTrans(true);
@@ -37,22 +54,21 @@ function ProjectSection() {
     setFileUpload(uploadedFile);
   };
 
- console.log("selected",selectedItem)
+  
 
   useEffect(() => {
     const fetchProjectData = async () => {
       try {
         const uploadId = Cookies.get('uploadId');
-        console.log("uploadId",uploadId)
         const response = await API.getAllFilesByUploadId(uploadId);
+        console.log("all upload file",response)
         setUploadFile(response.files);
       } catch (error) {
         console.error("Error fetching project data:", error.message);
       }
     };
-
     fetchProjectData();
-  }, []);
+  }, [])
 
   return (
     <div className="container mx-auto py-1">
@@ -74,6 +90,7 @@ function ProjectSection() {
         onClose={closeModal}
         addTranscript={addTranscript}
         selectedItem={selectedItem}
+        fetchData={fetchData}
       />
 
       {!showTrans ? (
@@ -113,10 +130,9 @@ function ProjectSection() {
         </>
       ) : (
         <Transcript
-          name={transcriptList.map((item) => item.name)}
-          descriptions={transcriptList.map((item) => item.description)}
-          setTranscriptList={setTranscriptList}
-          transcriptList={transcriptList} 
+          fetchData={fetchData}
+          details={details}
+          setDetails={setDetails}
         />
       )}
     </div>

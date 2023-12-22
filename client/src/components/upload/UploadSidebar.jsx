@@ -13,7 +13,6 @@ function UploadSidebar() {
   };
 
   const { projectName } = useParams();
-  console.log(projectName);
 
   return (
     <div className="flex flex-col h-screen justify-between">

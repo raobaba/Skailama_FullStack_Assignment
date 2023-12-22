@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { API } from "../../utils/Api.js";
 import Cookies from "js-cookie";
 
-const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem }) => {
+const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem, fetchData }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [nameError, setNameError] = useState('');
@@ -48,11 +48,11 @@ const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem }) => {
     const fileId = Cookies.get('fileId');
     try {
       await API.createDetails(uploadId, fileId, { name, description });
-      console.log("Successfully created")
       addTranscript({ name, description });
       setName('');
       setDescription('');
       onClose();
+      fetchData();
     } catch (error) {
       console.error("Error while saving details:", error);
     }

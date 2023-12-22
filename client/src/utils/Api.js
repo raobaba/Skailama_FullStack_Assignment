@@ -69,8 +69,8 @@ const API = {
   },
   deleteDetails: async (uploadId, fileId, detailId) => {
     try {
-      const response = await axios.post(
-        `${API_URL}/update/${uploadId}/${fileId}/${detailId}`
+      const response = await axios.delete(
+        `${API_URL}/delete/${uploadId}/${fileId}/${detailId}`
       );
       return response.data;
     } catch (error) {
