@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const uploadSchema = new mongoose.Schema({
   projectName: {
     type: String,
-    default:"Sample Project"
+    default: "Sample Project",
   },
   episode: {
     type: String,
@@ -32,6 +32,10 @@ const uploadSchema = new mongoose.Schema({
           },
           description: {
             type: String,
+          },
+          timeStamp: {
+            type: Date,
+            default: Date.now,
           },
         },
       ],

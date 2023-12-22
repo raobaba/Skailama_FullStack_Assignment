@@ -41,7 +41,12 @@ const createDetails = async (req, res) => {
     if (!fileToUpdate) {
       return res.status(404).json({ message: "File not found." });
     }
-    fileToUpdate.details.push({ name, description });
+
+    const kolkataTime = new Date().toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+    });
+
+    fileToUpdate.details.push({ name, description, timeStamp: kolkataTime, });
     await upload.save();
     res.status(200).json({ upload });
   } catch (err) {

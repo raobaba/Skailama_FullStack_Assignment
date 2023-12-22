@@ -33,6 +33,20 @@ function Transcript({ fetchData, details ,setDetails }) {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const formatTimeStamp = (timeStamp) => {
+    const date = new Date(timeStamp);
+    const day = date.getUTCDate();
+    const month = date.getUTCMonth() + 1;
+    const year = date.getUTCFullYear()
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedHours = hours < 10 ? `0${hours}` : hours;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    return `${formattedDay}:${formattedMonth}:${year} | ${formattedHours}:${formattedMinutes}`;
+  };
   
   return (
     <div className="ml-16 mt-4">
@@ -65,10 +79,10 @@ function Transcript({ fetchData, details ,setDetails }) {
                   <td className="border-b border-l pl-16 shadow-border">
                     {item.name}
                   </td>
-                  <td className="border-b pl-16 shadow-border">
-                    12 Dec 21 | 07:52
+                  <td className="border-b font-normal text-sm pl-16 shadow-border">
+                  {formatTimeStamp(item.timeStamp)}
                   </td>
-                  <td className="border-b pl-8 shadow-border">Done</td>
+                  <td className="border-b pl-8 font-normal text-sm shadow-border">Done</td>
                   <td className="border-b border-r flex pl-12 py-2 shadow-border">
                     <button
                       className="border w-10 h-7 text-sm font-medium cursor-pointer"
