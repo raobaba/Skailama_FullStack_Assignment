@@ -11,13 +11,14 @@ function ProjectSection() {
   const [showTrans, setShowTrans] = useState(false);
   const [transcriptList, setTranscriptList] = useState([]);
   const [selectedItem, setSelectedItem] = useState({});
-  const [uploadFile,setUploadFileUpload] = useState([])
+  const [uploadFile,setUploadFile] = useState([])
 
   const openModal = (item) => {
     setIsModalOpen(true);
     setSelectedItem(item);
+    console.log("fileId", item._id);
+    Cookies.set('fileId', item._id);
   };
-  console.log(selectedItem);
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -42,9 +43,9 @@ function ProjectSection() {
     const fetchProjectData = async () => {
       try {
         const uploadId = Cookies.get('uploadId');
-        console.log(uploadId)
+        console.log("uploadId",uploadId)
         const response = await API.getAllFilesByUploadId(uploadId);
-        setUploadFileUpload(response.files);
+        setUploadFile(response.files);
       } catch (error) {
         console.error("Error fetching project data:", error.message);
       }
@@ -52,7 +53,6 @@ function ProjectSection() {
 
     fetchProjectData();
   }, []);
-  console.log(uploadFile)
 
   return (
     <div className="container mx-auto py-1">

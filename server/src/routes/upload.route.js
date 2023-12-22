@@ -3,15 +3,17 @@ const uploadRouter = express.Router();
 const {
   createUpload,
   createDetails,
-  updateDescription,
+  updateDetails,
+  deleteDetails,
   getAllUpload,
   getFilesByUploadId,
   getDetailsByFileId
 } = require("../controllers/upload.controller.js");
 
 uploadRouter.post("/upload/:userId", createUpload);
-uploadRouter.post("/details/:uploadId/:fileId", createDetails);
-uploadRouter.put("/update/:uploadId/:fileId/:detailId", updateDescription);
+uploadRouter.post("/create/:uploadId/:fileId", createDetails);
+uploadRouter.put("/update/:uploadId/:fileId/:detailId", updateDetails);
+uploadRouter.delete("/delete/:uploadId/:fileId/:detailId", deleteDetails);
 uploadRouter.get("/getAll/:userId", getAllUpload);
 uploadRouter.get("/files/:uploadId", getFilesByUploadId);
 uploadRouter.get('/details/:uploadId/:fileId',getDetailsByFileId);

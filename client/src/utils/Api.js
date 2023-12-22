@@ -1,7 +1,7 @@
 // API.js
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:8000/api/v1';
+const API_URL = "http://localhost:8000/api/v1";
 
 const API = {
   signUpUser: async (userData) => {
@@ -14,7 +14,7 @@ const API = {
   },
   signInUser: async (userData) => {
     try {
-      const response = await axios.post(`${API_URL}/login`, userData); 
+      const response = await axios.post(`${API_URL}/login`, userData);
       return response.data;
     } catch (error) {
       throw new Error(error.message);
@@ -36,49 +36,74 @@ const API = {
       throw new Error(error.message);
     }
   },
-createUpload: async (projectName, userId) => {
-  try {
-    const response = await axios.post(`${API_URL}/upload/${userId}`, { projectName });
-    return response.data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-},
- createDetails :async (uploadId,fileId) =>{
-  try {
-    const response = await axios.post(`${API_URL}/details/${uploadId}/${fileId}`);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
- },
- updateDescription :async (uploadId,fileId,detailId) =>{
-  try {
-    const response = await axios.post(`${API_URL}/update/${uploadId}/${fileId}/${detailId}`);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
- },
- getAllUploads: async (userId) => {
-  try {
-    const response = await axios.get(`${API_URL}/getAll/${userId}`);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-},
+  createUpload: async (projectName, userId) => {
+    try {
+      const response = await axios.post(`${API_URL}/upload/${userId}`, {
+        projectName,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  createDetails: async (uploadId, fileId, details) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/create/${uploadId}/${fileId}`,
+        details
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  updateDetails: async (uploadId, fileId, detailId,description) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/update/${uploadId}/${fileId}/${detailId}`,{description}
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  deleteDetails: async (uploadId, fileId, detailId) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/update/${uploadId}/${fileId}/${detailId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  getAllUploads: async (userId) => {
+    try {
+      const response = await axios.get(`${API_URL}/getAll/${userId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
 
-getAllFilesByUploadId : async (uploadId) =>{
-  try {
-    const response = await axios.get(`${API_URL}/files/${uploadId}`);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-}
-
+  getAllFilesByUploadId: async (uploadId) => {
+    try {
+      const response = await axios.get(`${API_URL}/files/${uploadId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  getAllDetailsByFileId: async (uploadId, fileId) => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/details/${uploadId}/${fileId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
 };
 
-export {API};
-
+export { API };

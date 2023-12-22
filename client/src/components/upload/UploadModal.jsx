@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { API } from "../../utils/Api.js";
+import Cookies from "js-cookie";
 
 const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem }) => {
   const [name, setName] = useState('');
@@ -34,21 +35,27 @@ const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem }) => {
     setLinkError('');
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (name.trim() === '') {
       setNameError("Name field can't be empty");
       return;
     }
-
     if (description.trim() === '') {
       setLinkError("Link field can't be empty");
       return;
     }
-
-    addTranscript({ name, description });
-    setName('');
-    setDescription('');
-    onClose();
+    const uploadId = Cookies.get('uploadId');
+    const fileId = Cookies.get('fileId');
+    try {
+      await API.createDetails(uploadId, fileId, { name, description });
+      console.log("Successfully created")
+      addTranscript({ name, description });
+      setName('');
+      setDescription('');
+      onClose();
+    } catch (error) {
+      console.error("Error while saving details:", error);
+    }
   };
 
   return (
