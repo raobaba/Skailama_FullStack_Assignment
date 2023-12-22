@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-
-const ProjectModal = ({ isOpen, onClose, addProject }) => {
+import { API } from "../../utils/Api.js";
+import Cookies from 'js-cookie'
+const ProjectModal = ({ isOpen, onClose,fetchData }) => {
   const [projectName, setProjectName] = useState('');
   const [error, setError] = useState('');
   const modalRef = useRef(null);
@@ -25,16 +26,25 @@ const ProjectModal = ({ isOpen, onClose, addProject }) => {
     setProjectName(e.target.value);
     setError('');
   };
+  
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (projectName.trim() === '') {
       setError("Project name can't be empty");
       return;
     }
-    addProject(projectName);
-    setProjectName('');
-    onClose();
+    try {
+      const userId = Cookies.get('userId');
+      const response = await API.createUpload(projectName, userId);
+      setProjectName('');
+      onClose();
+      fetchData();
+    } catch (error) {
+      console.error("Error creating project:", error.message);
+      setError("Failed to create project");
+    }
   };
+  
 
   return (
     <div className={`fixed top-0 left-0 flex justify-center items-center w-full h-full ${isOpen ? "" : "hidden"}`}>

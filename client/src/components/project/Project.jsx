@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { IoSettingsOutline, IoNotificationsOutline } from "react-icons/io5";
 import MetaData from "../../utils/Metadata";
 import { Link } from "react-router-dom";
@@ -9,10 +9,12 @@ import { AiTwotoneHome } from "react-icons/ai";
 import { GoPlusCircle } from "react-icons/go";
 import ProjectModal from "./ProjectModal";
 import NewProject from "./NewProject";
+import { API } from "../../utils/Api.js";
+import Cookies from 'js-cookie'
 
 function Project() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [projectName, setProjectName] = useState([]);
+  const [projectData, setProjectData] = useState([]);
   const [show, setShow] = useState(false);
 
   const openModal = () => {
@@ -23,10 +25,32 @@ function Project() {
     setIsModalOpen(false);
   };
 
-  const addProject = (name) => {
-    setProjectName([...projectName, name]);
-    setShow(true);
-  };
+  useEffect(() => {
+    const fetchProjectData = async () => {
+      try {
+        const userId = Cookies.get('userId');
+        const response = await API.getAllUploads(userId);
+        setProjectData(response.uploads);
+      } catch (error) {
+        console.error("Error fetching project data:", error.message);
+      }
+    };
+
+    fetchProjectData();
+  }, []);
+  console.log(projectData)
+
+async function fetchAndDisplayData() {
+    try {
+      const userId = Cookies.get('userId');
+      const response = await API.getAllUploads(userId);
+      setProjectData(response.uploads);
+      setShow(true);
+    } catch (error) {
+      console.error("Error fetching and displaying project data:", error.message);
+    }
+  }  
+
 
   return (
     <>
@@ -72,7 +96,7 @@ function Project() {
         <ProjectModal
           isOpen={isModalOpen}
           onClose={closeModal}
-          addProject={addProject}
+          fetchData={fetchAndDisplayData}
         />
         {!show ? (
           <div className="p-8 rounded-lg w-auto text-center">
@@ -109,7 +133,7 @@ function Project() {
             </div>
           </div>
         ) : (
-          <NewProject projectName={projectName} openModal={openModal} />
+          <NewProject projectData={projectData} openModal={openModal}  />
         )}
       </div>
     </>

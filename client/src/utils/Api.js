@@ -36,14 +36,14 @@ const API = {
       throw new Error(error.message);
     }
   },
-  createUpload :async (projectName)  => {
-   try {
-    const response = await axios.post(`${API_URL}/uploaod`, projectName);
+createUpload: async (projectName, userId) => {
+  try {
+    const response = await axios.post(`${API_URL}/upload/${userId}`, { projectName });
     return response.data;
-   } catch (error) {
+  } catch (error) {
     throw new Error(error.message);
-   }
-  },
+  }
+},
  createDetails :async (uploadId,fileId) =>{
   try {
     const response = await axios.post(`${API_URL}/details/${uploadId}/${fileId}`);
@@ -59,7 +59,15 @@ const API = {
   } catch (error) {
     throw new Error(error.message);
   }
- }
+ },
+ getAllUploads: async (userId) => {
+  try {
+    const response = await axios.get(`${API_URL}/getAll/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
 };
 

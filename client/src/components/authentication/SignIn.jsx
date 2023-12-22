@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import MetaData from '../../utils/Metadata';
 import Navbar from '../Navbar';
 import { API } from "../../utils/Api.js";
+import Cookies from 'js-cookie';
 
 const SignIn = () => {
   const [login, setLogin] = useState(false);
@@ -26,6 +27,7 @@ const SignIn = () => {
     try {
       const response = await API.signInUser(formData);
       console.log('Login successful:', response);
+      Cookies.set('userId', response.user._id, { expires: 1 }); 
       navigate('/project');
     } catch (error) {
       console.error('Login failed:', error.message);
