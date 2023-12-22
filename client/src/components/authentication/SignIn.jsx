@@ -30,6 +30,7 @@ const SignIn = () => {
       navigate('/project');
     } catch (error) {
       console.error('Login failed:', error.message);
+      
     } finally {
       setLogin(false);
     }

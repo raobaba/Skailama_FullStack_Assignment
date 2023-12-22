@@ -16,6 +16,20 @@ function NewProject({ projectData = [], openModal }) {
     }
   };
 
+  const formatTimeStamp = (timeStamp) => {
+    const date = new Date(timeStamp);
+    const day = date.getUTCDate();
+    const month = date.getUTCMonth() + 1;
+    const year = date.getUTCFullYear()
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedMonth = month < 10 ? `0${month}` : month;
+    const formattedHours = hours < 10 ? `0${hours}` : hours;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    return `${formattedDay}:${formattedMonth}:${year} | ${formattedHours}:${formattedMinutes}`;
+  };
+
   return (
     <div>
       <div className="flex justify-around items-center mb-4">
@@ -62,7 +76,7 @@ function NewProject({ projectData = [], openModal }) {
                     </p>
                     <p className="text-sm font-normal">{project.episode}</p>
                     <p className="text-xs mt-4 font-normal text-gray-400">
-                      {project.timeStamp}
+                    {formatTimeStamp(project.timeStamp)}
                     </p>
                   </div>
                 </>
