@@ -35,7 +35,32 @@ const API = {
     } catch (error) {
       throw new Error(error.message);
     }
-  }  
+  },
+  createUpload :async (projectName)  => {
+   try {
+    const response = await axios.post(`${API_URL}/uploaod`, projectName);
+    return response.data;
+   } catch (error) {
+    throw new Error(error.message);
+   }
+  },
+ createDetails :async (uploadId,fileId) =>{
+  try {
+    const response = await axios.post(`${API_URL}/details/${uploadId}/${fileId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+ },
+ updateDescription :async (uploadId,fileId,detailId) =>{
+  try {
+    const response = await axios.post(`${API_URL}/update/${uploadId}/${fileId}/${detailId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+ }
+
 };
 
 export {API};

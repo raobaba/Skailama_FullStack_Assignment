@@ -82,8 +82,27 @@ const updateDescription = async (req, res) => {
   }
 };
 
+const getAllUpload = async (req,res)=>{
+  const userId = req.cookies.userId;
+
+  if (!userId) {
+    return res
+      .status(401)
+      .json({ message: "Please login to perform this action." });
+  }
+  try {
+    const uploads = await Upload.find({ userId }); 
+    res.status(200).json({ uploads });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Error retrieving uploads.", error: err.message });
+  }
+}
+
 module.exports = {
   createUpload,
   createDetails,
   updateDescription,
+  getAllUpload
 };
