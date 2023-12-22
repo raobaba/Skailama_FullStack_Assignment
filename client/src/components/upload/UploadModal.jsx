@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { API } from "../../utils/Api.js";
 
 const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem }) => {
   const [name, setName] = useState('');
@@ -54,9 +55,9 @@ const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem }) => {
     <div className={`fixed top-0 left-0 flex justify-center items-center w-full h-full ${isOpen ? "" : "hidden"}`}>
       <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
       <div ref={modalRef} className="modal-container bg-white w-8/12 rounded-xl shadow-lg z-50 p-6">
-        <div className="modal-header flex justify-between items-center">
-          
-          <h3 className="text-3xl mb-6 font-bold">{selectedItem.text}</h3>
+        <div className="modal-header flex gap-4 items-center">
+          <img src={selectedItem.url} alt="file_url" className="w-14 h-14 rounded-full" />
+          <h3 className="text-4xl mt-6 mb-6 text-gray-500 font-bold">{selectedItem.text}</h3>
         </div>
         <div className="modal-body">
           <label htmlFor="projectName" className="flex mb-2 justify-start ml-1">

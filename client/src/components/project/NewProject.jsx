@@ -1,13 +1,22 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { GoPlusCircle } from "react-icons/go";
+import Cookies from 'js-cookie';
 
 function NewProject({ projectData = [], openModal }) {
   const navigate = useNavigate();
 
-  const redirectToUpload = (project) => {
-    navigate(`/upload/${project}/project-section`);
+  const redirectToUpload = (index, projectName) => {
+    const storedIndex = Cookies.get('uploadId');
+    if (storedIndex !== undefined && parseInt(storedIndex) === index) {
+      navigate(`/upload/${projectName}/project-section`);
+    } else {
+      Cookies.set('uploadId', index, { expires: 1 });
+      navigate(`/upload/${projectName}/project-section`);
+    }
   };
+
+  console.log("projectData",projectData)
 
   return (
     <div>
@@ -31,7 +40,8 @@ function NewProject({ projectData = [], openModal }) {
             <div
               key={index}
               className="flex ml-5 cursor-pointer items-center h-24 w-64 rounded-2xl shadow-lg border border-slate-300"
-              onClick={() => redirectToUpload(project)}
+              onClick={() => redirectToUpload(project._id, project.projectName)}
+              
             >
               {project && project.projectName ? (
                 <>

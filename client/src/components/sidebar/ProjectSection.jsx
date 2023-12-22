@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import YouTube from "../../assets/images/youtube.png";
-import Spotify from "../../assets/images/spotify.png";
-import RSS from "../../assets/images/RSS.png";
+import React, { useState ,useEffect} from "react";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import UploadModal from "../upload/UploadModal";
 import Transcript from "../transcript/Transcript";
+import Cookies from "js-cookie";
+import { API } from "../../utils/Api.js";
 
 function ProjectSection() {
   const [fileUpload, setFileUpload] = useState(null);
@@ -12,6 +11,7 @@ function ProjectSection() {
   const [showTrans, setShowTrans] = useState(false);
   const [transcriptList, setTranscriptList] = useState([]);
   const [selectedItem, setSelectedItem] = useState({});
+  const [uploadFile,setUploadFileUpload] = useState([])
 
   const openModal = (item) => {
     setIsModalOpen(true);
@@ -36,26 +36,35 @@ function ProjectSection() {
     setFileUpload(uploadedFile);
   };
 
-  const uploadItems = [
-    { image: YouTube, text: "Upload YouTube Video" },
-    { image: Spotify, text: "Upload Spotify Podcast" },
-    { image: RSS, text: "Upload from RSS Feed" },
-    { image: YouTube, text: "Upload YouTube Video" },
-    { image: Spotify, text: "Upload Spotify Podcast" },
-    { image: RSS, text: "Upload from RSS Feed" },
-  ];
+ console.log("selected",selectedItem)
+
+  useEffect(() => {
+    const fetchProjectData = async () => {
+      try {
+        const uploadId = Cookies.get('uploadId');
+        console.log(uploadId)
+        const response = await API.getAllFilesByUploadId(uploadId);
+        setUploadFileUpload(response.files);
+      } catch (error) {
+        console.error("Error fetching project data:", error.message);
+      }
+    };
+
+    fetchProjectData();
+  }, []);
+  console.log(uploadFile)
 
   return (
     <div className="container mx-auto py-1">
       <h1 className="text-3xl font-bold ml-16 mb-4 text-purple-700">Upload</h1>
       <div className="grid ml-16 grid-cols-1 mt-5 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-6 w-10/12">
-        {uploadItems.map((item, index) => (
+        {uploadFile.map((item, index) => (
           <div
             key={index}
             className="flex items-center justify-center bg-white w-60 cursor-pointer h-20 border border-gray-300 p-4 rounded-lg shadow-md"
             onClick={() => openModal(item)}
           >
-            <img src={item.image} alt="logo" className="w-12 h-12 mb-2" />
+            <img src={item.url} alt="logo" className="w-12 h-12 mb-2" />
             <p className="text-center font-bold text-gray-500 ">{item.text}</p>
           </div>
         ))}

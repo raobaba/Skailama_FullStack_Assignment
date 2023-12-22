@@ -67,6 +67,15 @@ createUpload: async (projectName, userId) => {
   } catch (error) {
     throw new Error(error.message);
   }
+},
+
+getAllFilesByUploadId : async (uploadId) =>{
+  try {
+    const response = await axios.get(`${API_URL}/files/${uploadId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
 
 };
