@@ -46,7 +46,6 @@ function Setting() {
     if (file) {
       reader.readAsDataURL(file);
     }
-    console.log("Selected file:", file);
   };
 
   const handleUpdate = async (e) => {

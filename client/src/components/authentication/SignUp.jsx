@@ -40,7 +40,6 @@ const SignUp = () => {
 
     try {
       const response = await API.signUpUser(formDataToSend);
-      console.log("Registration successful:", response);
       navigate("/signin");
     } catch (error) {
       console.error("Registration failed:", error.message);

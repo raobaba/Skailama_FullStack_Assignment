@@ -38,7 +38,6 @@ function Project() {
 
     fetchProjectData();
   }, []);
-  console.log(projectData)
 
 async function fetchAndDisplayData() {
     try {

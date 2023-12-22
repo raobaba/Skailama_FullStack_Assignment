@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { API } from "../../utils/Api.js";
 import Cookies from "js-cookie";
 
 function Transcript({ fetchData, details ,setDetails }) {
   const navigate = useNavigate();
-  const { projectName } = useParams();
 
   const handleEditClick = (item) => {
     console.log("Update clicked for detailId:", item);
@@ -14,7 +13,7 @@ function Transcript({ fetchData, details ,setDetails }) {
     const uploadId = Cookies.get("uploadId");
     const fileId = Cookies.get("fileId");
     const nameToSend = details[detaildId];
-    navigate(`/upload/${projectName}/edit-transcript`, {
+    navigate(`/upload/${item}/edit-transcript`, {
       state: { name: nameToSend },
     });
   };
@@ -23,15 +22,11 @@ function Transcript({ fetchData, details ,setDetails }) {
     
     const uploadId = Cookies.get("uploadId");
     const fileId = Cookies.get("fileId");
-    console.log("uploadId:", uploadId);
-    console.log("fileId:", fileId);
-    console.log("detailId:", detailId);
+
     try {
       await API.deleteDetails(uploadId, fileId, detailId);
       const updatedTranscripts = details.filter(item => item._id !== detailId);
-      console.log("Updated Transcripts:", updatedTranscripts);
       setDetails(updatedTranscripts);
-    
     } catch (error) {
       console.error("Error deleting item:", error);
     }
@@ -40,9 +35,7 @@ function Transcript({ fetchData, details ,setDetails }) {
   useEffect(() => {
     fetchData();
   }, []);
-
-  console.log("details", details);
-
+  
   return (
     <div className="ml-16 mt-4">
       <div className="w-10/12 h-12 flex justify-between rounded-lg bg-purple-700">

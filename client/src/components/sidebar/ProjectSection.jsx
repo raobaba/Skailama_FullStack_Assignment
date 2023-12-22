@@ -18,10 +18,7 @@ function ProjectSection() {
     try {
       const uploadId = Cookies.get('uploadId');
       const fileId = Cookies.get('fileId');
-      console.log(uploadId)
-      console.log(fileId);
       const response = await API.getAllDetailsByFileId(uploadId, fileId);
-      console.log("ressponse",response)
       setDetails(response.details); 
     } catch (error) {
       console.error("Error fetching data: ", error);
@@ -32,7 +29,6 @@ function ProjectSection() {
   const openModal = (item) => {
     setIsModalOpen(true);
     setSelectedItem(item);
-    console.log("fileId", item._id);
     Cookies.set('fileId', item._id);
   };
 
@@ -61,7 +57,6 @@ function ProjectSection() {
       try {
         const uploadId = Cookies.get('uploadId');
         const response = await API.getAllFilesByUploadId(uploadId);
-        console.log("all upload file",response)
         setUploadFile(response.files);
       } catch (error) {
         console.error("Error fetching project data:", error.message);

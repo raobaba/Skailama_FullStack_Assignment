@@ -8,17 +8,13 @@ function NewProject({ projectData = [], openModal }) {
 
   const redirectToUpload = (index, projectName) => {
     const storedIndex = Cookies.get('uploadId');
-    console.log(storedIndex)
     if (storedIndex !== undefined && parseInt(storedIndex) === index) {
       navigate(`/upload/${projectName}/project-section`);
     } else {
       Cookies.set('uploadId', index, { expires: 1 });
-
       navigate(`/upload/${projectName}/project-section`);
     }
   };
-
-  console.log("projectData",projectData)
 
   return (
     <div>
