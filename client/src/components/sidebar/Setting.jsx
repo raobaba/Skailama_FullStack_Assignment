@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { API } from "../../utils/Api.js";
+import Cookies from "js-cookie";
 
 function Setting() {
   const fileInputRef = useRef(null);
@@ -13,7 +14,7 @@ function Setting() {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const userId = "6584879ded3b9c4185e146be";
+        const userId = Cookies.get('userId');
         const userData = await API.getUserById(userId);
         const details = userData.user;
         setUserDetails({
@@ -53,7 +54,7 @@ function Setting() {
     const formDataToSend = new FormData();
     formDataToSend.append("username", userDetails.username);
     formDataToSend.append("avatar", selectedFile); 
-    const userId = "6584879ded3b9c4185e146be";
+    const userId = Cookies.get('userId');
     try {
       const response = await API.updateUserDetails(userId, formDataToSend); 
       console.log("Update successful:", response);
