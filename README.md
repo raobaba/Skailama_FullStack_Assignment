@@ -20,6 +20,7 @@ This project is a comprehensive backend system built using Node.js, Express, and
 - **JWT (JSON Web Tokens)**: Used for secure authentication.
 - **Bcrypt**: Library for hashing passwords securely.
 - **Cloudinary**: Cloud-based image and video management service used for avatar uploads.
+- For API endpoints and examples, refer to the [Postman Collection]([link-to-your-postman-collection](https://universal-star-350473.postman.co/workspace/New-Team-Workspace~e0c863f1-62ad-4bfc-9e5c-9f0a990ce90c/collection/30678801-96798a37-d454-438f-b8e4-bb5211d8d492?action=share&creator=30678801)).
 
 ## Getting Started
 
