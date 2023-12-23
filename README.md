@@ -66,21 +66,21 @@ This project is a comprehensive backend system built using Node.js, Express, and
 
 **User Routes:**
 
-- `/api/user/register`: Register a new user.
-- `/api/user/login`: Log in a user.
-- `/api/user/logout`: Log out the user.
-- `/api/user/getById/:id`: Get user details by ID.
-- `/api/user/:id`: Update user details.
+- `/api/v1/register`: Register a new user.
+- `/api/v1/login`: Log in a user.
+- `/api/v1/logout`: Log out the user.
+- `/api/v1/getById/:id`: Get user details by ID.
+- `/api/v1/:id`: Update user details.
 
 **Upload Routes:**
 
-- `/api/upload/:userId`: Create a new upload.
-- `/api/upload/create/:uploadId/:fileId`: Create details for a file in an upload.
-- `/api/upload/update/:uploadId/:fileId/:detailId`: Update details for a file in an upload.
-- `/api/upload/delete/:uploadId/:fileId/:detailId`: Delete details for a file in an upload.
-- `/api/upload/getAll/:userId`: Get all uploads by user ID.
-- `/api/upload/files/:uploadId`: Get files by upload ID.
-- `/api/upload/details/:uploadId/:fileId`: Get details by file ID in an upload.
+- `/api/v1/:userId`: Create a new upload.
+- `/api/v1/create/:uploadId/:fileId`: Create details for a file in an upload.
+- `/api/v1/update/:uploadId/:fileId/:detailId`: Update details for a file in an upload.
+- `/api/v1/delete/:uploadId/:fileId/:detailId`: Delete details for a file in an upload.
+- `/api/v1/getAll/:userId`: Get all uploads by user ID.
+- `/api/v1/files/:uploadId`: Get files by upload ID.
+- `/api/v1/details/:uploadId/:fileId`: Get details by file ID in an upload.
 
 ### Contributing
 
