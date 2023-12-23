@@ -1,7 +1,7 @@
 // API.js
 import axios from "axios";
 
-const API_URL = "https://skai-lama-zura.onrender.com/api/v1";
+const API_URL = "http://localhost:8000/api/v1";
 
 const API = {
   signUpUser: async (userData) => {

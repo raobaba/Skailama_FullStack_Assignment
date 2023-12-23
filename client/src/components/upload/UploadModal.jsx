@@ -48,6 +48,7 @@ const UploadModal = ({ isOpen, onClose, addTranscript, selectedItem, fetchData }
     const fileId = Cookies.get('fileId');
     try {
       await API.createDetails(uploadId, fileId, { name, description });
+      console.log("create success")
       addTranscript({ name, description });
       setName('');
       setDescription('');

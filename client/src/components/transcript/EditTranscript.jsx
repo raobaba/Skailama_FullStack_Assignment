@@ -23,6 +23,7 @@ const EditTranscript = () => {
      console.log(detailId)
     try {
       await API.updateDetails(uploadId, fileId, detailId, editedDescription);
+      console.log("update success")
       console.log("success")
       navigate(`/upload/${projectName}/project-section`);
     } catch (error) {

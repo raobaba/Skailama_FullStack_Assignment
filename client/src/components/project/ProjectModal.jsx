@@ -36,6 +36,7 @@ const ProjectModal = ({ isOpen, onClose,fetchData }) => {
     try {
       const userId = Cookies.get('userId');
       const response = await API.createUpload(projectName, userId);
+      console.log("createUpload success")
       setProjectName('');
       onClose();
       fetchData();

@@ -30,6 +30,7 @@ function Project() {
       try {
         const userId = Cookies.get('userId');
         const response = await API.getAllUploads(userId);
+        console.log("getAllUploads success")
         setProjectData(response.uploads);
       } catch (error) {
         console.error("Error fetching project data:", error.message);

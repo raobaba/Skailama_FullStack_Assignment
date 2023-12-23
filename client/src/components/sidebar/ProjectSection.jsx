@@ -19,6 +19,7 @@ function ProjectSection() {
       const uploadId = Cookies.get('uploadId');
       const fileId = Cookies.get('fileId');
       const response = await API.getAllDetailsByFileId(uploadId, fileId);
+      console.log("getAllDetails success")
       setDetails(response.details); 
     } catch (error) {
       console.error("Error fetching data: ", error);

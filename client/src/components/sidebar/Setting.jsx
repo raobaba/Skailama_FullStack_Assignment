@@ -16,6 +16,7 @@ function Setting() {
       try {
         const userId = Cookies.get('userId');
         const userData = await API.getUserById(userId);
+        console.log("getUserById success")
         const details = userData.user;
         setUserDetails({
           username: details.username,

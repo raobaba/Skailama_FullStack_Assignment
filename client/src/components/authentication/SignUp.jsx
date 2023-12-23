@@ -28,23 +28,30 @@ const SignUp = () => {
       }));
     }
   };
+  console.log(formData)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSigningUp(true);
+  
     const formDataToSend = new FormData();
     formDataToSend.append("username", formData.username);
     formDataToSend.append("email", formData.email);
     formDataToSend.append("password", formData.password);
     formDataToSend.append("avatar", formData.avatar);
-
+  
     try {
+      console.log("Form Data to Send: ", formDataToSend); // Check the form data before sending
+  
       const response = await API.signUpUser(formDataToSend);
+      console.log("SignUp success", response); // Check the API response
+  
       navigate("/signin");
     } catch (error) {
       console.error("Registration failed:", error.message);
     }
   };
+  
 
   return (
     <>

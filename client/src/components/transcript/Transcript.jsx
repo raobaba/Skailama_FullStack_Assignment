@@ -24,6 +24,7 @@ function Transcript({ fetchData, details ,setDetails }) {
     try {
       await API.deleteDetails(uploadId, fileId, detailId);
       const updatedTranscripts = details.filter(item => item._id !== detailId);
+      console.log("delete success")
       setDetails(updatedTranscripts);
     } catch (error) {
       console.error("Error deleting item:", error);

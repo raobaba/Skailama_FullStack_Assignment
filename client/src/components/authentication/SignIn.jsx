@@ -25,7 +25,9 @@ const SignIn = () => {
     e.preventDefault();
     setLogin(true);
     try {
+      console.log(formData)
       const response = await API.signInUser(formData);
+      console.log("SingIn success")
       Cookies.set('userId', response.user._id, { expires: 1 }); 
       navigate('/project');
     } catch (error) {
